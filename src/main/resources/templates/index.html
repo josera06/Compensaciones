@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/plantilla :: head">
+    <meta charset="UTF-8">
+    <title>Solicitud de compensaciones</title>
+</head>
+<body>
+<header th:replace="layout/plantilla :: header"></header>
+    <a th:href="@{/solicitud}">Solicitud</a>
+
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/trabajador}">Trabajador</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/adscripcion}">Adscripcion</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/solicitud}">Solicitud</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/dictaminar}">Dictaminar</a>
+<footer th:replace="layout/plantilla :: footer"></footer>
+</body>
+</html>

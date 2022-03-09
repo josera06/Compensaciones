@@ -77,3 +77,7 @@ ALTER TABLE public.myname_record OWNER to rndb;
  tb_adscripcion
  tb_adscripcion_id_adscripcion_seq
  compensaciones | tb_dictamen
+
+ createdb compensacion
+ create user usercomp  with password '1234'
+ psql compensacion < compensacion.sql -U usercomp -h localhost

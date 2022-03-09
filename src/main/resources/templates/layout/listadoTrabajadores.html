@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de trabajadores</title>
+</head>
+<body>
+    <section th:fragment="listadoTrabajadores" id="trabajadores">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>[[#{persona.titulo-lista}]]</h4>
+                        </div>
+                        <div th:if="${trabajadores != null and !trabajadores.empty}">
+                            <table class="table table-stryped">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido paterno</th>
+                                    <th>Apellido materno</th>
+                                    <th>Correo electrónico</th>
+                                    <th>Confirmar</th>
+                                    <th>Editar</th>
+                                    <th>Eliminar</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="trabajador, contador : ${trabajadores}">
+                                    <td>[[${contador.count}]]</td>
+                                    <td th:text="${trabajador.nombre}"></td>
+                                    <td th:text="${trabajador.apPaterno}"></td>
+                                    <td th:text="${trabajador.apMaterno}"></td>
+                                    <td th:text="${trabajador.email}"></td>
+                                    <td>
+                                        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/confirmarTrabajador/} + ${trabajador.idTrabajador}"
+                                           class="btn btn-secondary">
+                                            <i class="fas fa-angle-double-right"></i> [[#{accion.confirmar}]]
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editar/} + ${trabajador.idTrabajador}"
+                                           class="btn btn-secondary">
+                                            <i class="fas fa-angle-double-right"></i> [[#{accion.editar}]]
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/eliminar(idTrabajador=${trabajador.idTrabajador})}"
+                                           class="btn btn-dark">
+                                            <i class="fas fa-angle-double-right"></i> [[#{accion.eliminar}]]
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="text-center p-2" th:if="${trabajadores == null or trabajadores.empty}">
+                            <span th:text="#{persona.lista-vacia}">Lista vacía</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

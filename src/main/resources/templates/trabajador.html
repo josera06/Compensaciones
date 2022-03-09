@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/xhtml">
-<head>
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/plantilla :: head">
     <meta charset="UTF-8">
     <title>TrabaJADORES</title>
 </head>
 <body>
 <header th:replace="layout/plantilla :: header"></header>
-<a th:href="@{/agregarTrabajador}">Crear Trabajador</a>
+<section th:replace="layout/botonesAgregar :: botonesAgregar"></section>
+<section th:replace="layout/listadoTrabajadores :: listadoTrabajadores"></section>
+<!--
+<section th:replace="layout/agregarTrabajador :: agregarTrabajador"></section>
+-->
+<footer th:replace="layout/plantilla :: footer"></footer>
 
+<a th:href="@{/agregarTrabajador}">Crear Trabajador</a>
 <h3>Lista de solicitude de registro para nuevos trabajadores</h3>
 <div th:if="${trabajadores != null and !trabajadores.empty}">
     <table border="1">
@@ -26,15 +33,15 @@
             <td th:text="${trabajador.apPaterno}"></td>
             <td th:text="${trabajador.apMaterno}"></td>
             <td th:text="${trabajador.email}"></td>
-            <td> <a th:href="@{/confirmarTrabajador/}+${trabajador.idTrabajador}" th:text="Confirmar"> </td>
-            <td> <a th:href="@{/editarTrabajador/}+${trabajador.idTrabajador}" th:text="Editar"> </td>
-            <td> <a th:href="@{/eliminarTrabajador/}+${trabajador.idTrabajador}" th:text="Eliminar"> </td>
+            <td> <a th:href="@{/confirmarTrabajador/}+${trabajador.idTrabajador}" th:text="Confirmar"></a> </td>
+            <td> <a th:href="@{/editarTrabajador/}+${trabajador.idTrabajador}" th:text="Editar"></a> </td>
+            <td> <a th:href="@{/eliminarTrabajador/}+${trabajador.idTrabajador}" th:text="Eliminar"></a> </td>
         </tr>
     </table>
 </div>
 <div th:if="${trabajadores == null or trabajadores.empty}">
     La lista está vacia
 </div>
-<footer th:replace="layout/plantilla :: footer"></footer>
+
 </body>
 </html>

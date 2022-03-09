@@ -81,3 +81,7 @@ ALTER TABLE public.myname_record OWNER to rndb;
  createdb compensacion
  create user usercomp  with password '1234'
  psql compensacion < compensacion.sql -U usercomp -h localhost
+
+ --Hosting
+ --godaddy
+

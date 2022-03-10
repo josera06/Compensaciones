@@ -85,3 +85,5 @@ ALTER TABLE public.myname_record OWNER to rndb;
  --Hosting
  --godaddy
 
+--Prueba reporte
+--http://localhost:8080/report/ventas/download?tipo=PDF&confirmado=true

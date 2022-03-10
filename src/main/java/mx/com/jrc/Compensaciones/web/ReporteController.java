@@ -1,5 +1,6 @@
 package mx.com.jrc.Compensaciones.web;
 
+import lombok.extern.slf4j.Slf4j;
 import mx.com.jrc.Compensaciones.service.ReporteTrabajadoresService;
 import mx.com.jrc.Compensaciones.util.TipoReporteEnum;
 import net.sf.jasperreports.engine.JRException;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
 
+@Slf4j
 @RestController
 @RequestMapping("/report")
 public class ReporteController {
@@ -26,6 +28,16 @@ public class ReporteController {
 
     @GetMapping(path="/ventas/download")
     public ResponseEntity<Resource> download(@RequestParam Map<String,Object> params) throws JRException, SQLException, IOException {
+        var parametro = params.get("confirmado");
+        Boolean confirmado = false;
+        log.info("Parametro: " + parametro.toString());
+        if(parametro.equals("true"))
+            confirmado = true;
+        params.put("confirmado",confirmado);
+        log.info("Confirmado class: " + confirmado.getClass());
+        log.info("Confirmado parametro class: " + params.get("confirmado").getClass());
+        log.info("Mapa de parametros: " + params.toString());
+
         var dto = reporteTrabajadoresService.obtenerReporte(params);
         var streamResource = new InputStreamResource(dto.getStream());
         MediaType mediaType = null;
@@ -36,5 +48,6 @@ public class ReporteController {
         }
         return ResponseEntity.ok().header("Content-Disposition","inline: filename=\"" + dto.getFileName()+"\"")
                 .contentLength(dto.getLength()).contentType(mediaType).body(streamResource);
+
     }
 }

@@ -24,8 +24,7 @@ public class Trabajador {
     private String apMaterno;
     private String matricula;
     private String categoria;
-    private BigDecimal sueldoQuincenal;
-    private Long idAdscripcion;
+    private double sueldoQuincenal;
     private boolean horarioDiscontinuo;
     private String calle;
     private String colonia;
@@ -35,7 +34,5 @@ public class Trabajador {
     @Email
     private String email;
     private String telefono;
-    private boolean representanteImss;
-    private boolean representanteSntss;
     private boolean confirmado;
 }

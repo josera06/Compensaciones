@@ -1,14 +1,9 @@
 package mx.com.jrc.Compensaciones.web;
 
 import lombok.extern.slf4j.Slf4j;
-import mx.com.jrc.Compensaciones.dao.AdscriprionDAO;
-import mx.com.jrc.Compensaciones.dao.TrabajadorDAO;
-import mx.com.jrc.Compensaciones.domain.Adscripcion;
 import mx.com.jrc.Compensaciones.domain.Trabajador;
 import mx.com.jrc.Compensaciones.service.TrabajadorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -16,11 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 @Controller
 @Slf4j
@@ -38,8 +30,14 @@ public class ControladorInicio {
     @GetMapping("/trabajador")
     public String inicioTrabajador(Model model) {
         var trabajadores = trabajadorService.listarPendientesConfirmar();
-        log.info("Ejecutando el controlador Spring MVC");
+
+        var saldoTotal = 0D;
+        for(var p:trabajadores){
+            saldoTotal += p.getSueldoQuincenal();
+        }
         model.addAttribute("trabajadores", trabajadores);
+        model.addAttribute("saldoTotal", saldoTotal);
+        model.addAttribute("totalTrabajadores", trabajadores.size());
         return "trabajador";
     }
 

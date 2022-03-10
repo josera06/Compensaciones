@@ -36,6 +36,7 @@
                                     <td th:text="${trabajador.apPaterno}"></td>
                                     <td th:text="${trabajador.apMaterno}"></td>
                                     <td th:text="${trabajador.email}"></td>
+
                                     <td>
                                         <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/confirmarTrabajador/} + ${trabajador.idTrabajador}"
                                            class="btn btn-secondary">
@@ -43,13 +44,13 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editar/} + ${trabajador.idTrabajador}"
+                                        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editarTrabajador/} + ${trabajador.idTrabajador}"
                                            class="btn btn-secondary">
                                             <i class="fas fa-angle-double-right"></i> [[#{accion.editar}]]
                                         </a>
                                     </td>
                                     <td>
-                                        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/eliminar(idTrabajador=${trabajador.idTrabajador})}"
+                                        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/eliminarTrabajador/} + ${trabajador.idTrabajador}"
                                            class="btn btn-dark">
                                             <i class="fas fa-angle-double-right"></i> [[#{accion.eliminar}]]
                                         </a>
@@ -60,6 +61,25 @@
                         </div>
                         <div class="text-center p-2" th:if="${trabajadores == null or trabajadores.empty}">
                             <span th:text="#{persona.lista-vacia}">Lista vacía</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center bg-danger text-white mb-3">
+                        <div class="card-body">
+                            <h3 th:text="#{persona.saldoTotal}">Saldo total</h3>
+                            <h4 class="display-4">
+                                [[${new java.text.DecimalFormat('$#,##0.00').format(saldoTotal)}]]
+                            </h4>
+                        </div>
+                    </div>
+
+                    <div class="card text-center bg-success text-white mb-3">
+                        <div class="card-body">
+                            <h3 th:text="#{persona.totalTrabajadores}">Total Clientes</h3>
+                            <h4 class="display-4">
+                                <i class="fas fa-users"></i> [[${totalTrabajadores}]]
+                            </h4>
                         </div>
                     </div>
                 </div>

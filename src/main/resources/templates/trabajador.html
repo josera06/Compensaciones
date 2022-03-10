@@ -4,44 +4,14 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/plantilla :: head">
     <meta charset="UTF-8">
-    <title>TrabaJADORES</title>
+    <title>Trabajadores</title>
 </head>
 <body>
 <header th:replace="layout/plantilla :: header"></header>
 <section th:replace="layout/botonesAgregar :: botonesAgregar"></section>
 <section th:replace="layout/listadoTrabajadores :: listadoTrabajadores"></section>
-<!--
 <section th:replace="layout/agregarTrabajador :: agregarTrabajador"></section>
--->
 <footer th:replace="layout/plantilla :: footer"></footer>
-
-<a th:href="@{/agregarTrabajador}">Crear Trabajador</a>
-<h3>Lista de solicitude de registro para nuevos trabajadores</h3>
-<div th:if="${trabajadores != null and !trabajadores.empty}">
-    <table border="1">
-        <tr>
-            <th>Nombre</th>
-            <th>Apellido paterno</th>
-            <th>Apellido materno</th>
-            <th>Correo electrónico</th>
-            <th>Confirmar</th>
-            <th>Editar</th>
-            <th>Eliminar</th>
-        </tr>
-        <tr th:each="trabajador : ${trabajadores}">
-            <td th:text="${trabajador.nombre}"></td>
-            <td th:text="${trabajador.apPaterno}"></td>
-            <td th:text="${trabajador.apMaterno}"></td>
-            <td th:text="${trabajador.email}"></td>
-            <td> <a th:href="@{/confirmarTrabajador/}+${trabajador.idTrabajador}" th:text="Confirmar"></a> </td>
-            <td> <a th:href="@{/editarTrabajador/}+${trabajador.idTrabajador}" th:text="Editar"></a> </td>
-            <td> <a th:href="@{/eliminarTrabajador/}+${trabajador.idTrabajador}" th:text="Eliminar"></a> </td>
-        </tr>
-    </table>
-</div>
-<div th:if="${trabajadores == null or trabajadores.empty}">
-    La lista está vacia
-</div>
 
 </body>
 </html>

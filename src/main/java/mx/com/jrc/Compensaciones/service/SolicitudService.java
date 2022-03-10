@@ -1,6 +1,5 @@
 package mx.com.jrc.Compensaciones.service;
 
-import mx.com.jrc.Compensaciones.domain.Dictamen;
 import mx.com.jrc.Compensaciones.domain.Solicitud;
 
 import java.util.List;

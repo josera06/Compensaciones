@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/plantilla :: head">
+    <meta charset="UTF-8">
+    <title>Editar trabajador</title>
+</head>
+<body>
+<section th:fragment="editarTrabajador">
+    <form th:action="@{/guardarTrabajador}" th:object="${trabajador}"
+          method="post" class="was-validated">
+        <input type="hidden" name="idTrabajador" th:field="*{idTrabajador}"/>
+        <section th:replace="layout/botonesEditar :: botonesEditar"></section>
+        <div id="details">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>[[#{accion.editar}]]</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="nombre">[[#{persona.nombre}]]</label>
+                                    <input type="text" class="form-control" name="nombre"
+                                           required="true" th:field="*{nombre}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="apPaterno">[[#{persona.apPaterno}]]</label>
+                                    <input type="text" class="form-control" name="apPaterno"
+                                           required="true" th:field="*{apPaterno}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="apMaterno">[[#{persona.apMaterno}]]</label>
+                                    <input type="text" class="form-control" name="apMaterno"
+                                           required="true" th:field="*{apMaterno}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">[[#{persona.email}]]</label>
+                                    <input type="email" class="form-control" name="email"
+                                           required="true" th:field="*{email}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sueldoQuincenal">[[#{persona.sueldoQuincenal}]]</label>
+                                    <input type="number" class="form-control" name="sueldoQuincenal"
+                                           required="true" th:field="*{sueldoQuincenal}" step="any"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+</body>
+</html>

@@ -1,24 +1,15 @@
-DROP TABLE compensaciones.tb_adscripcion;
-CREATE TABLE compensaciones.tb_adscripcion (
-	id_adscripcion serial primary key,
-	calle character varying,
-	colonia character varying,
-	codigo_postal character varying,
-	municipio character varying,
-	estado character varying,
-	telefono character varying
-);
-
+DROP TABLE compensaciones.tb_solicitud;
 DROP TABLE compensaciones.tb_trabajador;
+
 CREATE TABLE compensaciones.tb_trabajador (
 	id_trabajador serial primary key,
 	nombre character varying,
 	ap_paterno character varying,
 	ap_materno character varying,
+	email character varying,
 	matricula character varying,
 	categoria character varying,
 	sueldo_quincenal numeric,
-	id_adscripcion integer REFERENCES compensaciones.tb_adscripcion(id_adscripcion),
 	horario_discontinuo boolean,
 	calle character varying,
 	colonia character varying,
@@ -26,21 +17,14 @@ CREATE TABLE compensaciones.tb_trabajador (
 	municipio character varying,
 	estado character varying,
 	telefono character varying,
-	representante_imss boolean,
-	representante_sntss boolean
+	confirmado boolean
 );
 
-DROP TABLE compensaciones.tb_solicitud;
 CREATE TABLE compensaciones.tb_solicitud(
     id_solicitud serial primary key,
+    id_trabajador integer REFERENCES compensaciones.tb_trabajador(id_trabajador),
     fecha timestamp,
     numero_control character varying,
-    id_trabajador integer REFERENCES compensaciones.tb_trabajador(id_trabajador)
-);
-
-DROP TABLE compensaciones.tb_dictamen;
-CREATE TABLE compensaciones.tb_dictamen(
-    id_dictamen serial primary key,
     importe_quincenal numeric,
     fec_ini date,
     observaciones character varying,
@@ -59,8 +43,7 @@ CREATE TABLE compensaciones.tb_dictamen(
     retro_quincena_final character varying,
     retro_no_control character varying,
     retro_cifra_control character varying,
-    retro_responsable_reporte character varying,
-    id_trabajador integer REFERENCES compensaciones.tb_trabajador(id_trabajador)
+    retro_responsable_reporte character varying
 );
 
 CREATE DATABASE projects;
@@ -70,7 +53,7 @@ alter user compensacion with encrypted password '1234' login;
 GRANT USAGE ON SCHEMA compensaciones TO compensacion;
 SET search_path TO compensacion;
 ALTER ROLE compensacion SET search_path TO compensaciones;
-GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA compensaciones TO compensacion;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA compensaciones TO usercomp;
 
 ALTER TABLE public.myname_record OWNER to rndb;
 

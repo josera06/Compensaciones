@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/xhtml">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/plantilla :: head">
     <meta charset="UTF-8">
     <title>Login</title>
@@ -10,10 +11,10 @@
 
 <section id="actions" class="py-4 mb-4 bg-light">
     <div class="row">
-        <!--se pueden agregar botones-->
+
     </div>
 </section>
-
+<section th:replace="layout/agregarTrabajador :: agregarTrabajador"></section>
 <section id="login">
     <div class="container">
         <div class="row">
@@ -34,6 +35,7 @@
                             </div>
                             <input type="submit" value="Login" class="btn btn-primary btn-block"/>
                         </form>
+                        <section th:replace="layout/botonesAgregar :: botonesAgregarLogin"></section>
                     </div>
                 </div>
             </div>

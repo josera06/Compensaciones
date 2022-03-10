@@ -1,10 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Agregar trabajador</title>
 </head>
 <body>
-
+    <section th:fragment="agregarTrabajador">
+        <div id="agregarTrabajador" class="modal fade">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-info text-white">
+                        <h5 class="modal-title" th:text="#{accion.agregar}">Agregar Trabajador</h5>
+                        <button class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <form th:action="@{/guardarTrabajador}" th:object="${trabajador}"
+                          method="post" class="was-validated">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="nombre" th:text="#{persona.nombre}">Nombre</label>
+                                <input type="text" class="form-control" name="nombre" required="true">
+                            </div>
+                            <div class="form-group">
+                                <label for="apPaterno" th:text="#{persona.apPaterno}">Apellido paterno</label>
+                                <input type="text" class="form-control" name="apPaterno" required="true">
+                            </div>
+                            <div class="form-group">
+                                <label for="apMaterno" th:text="#{persona.apMaterno}">Apellido materno</label>
+                                <input type="text" class="form-control" name="apMaterno" required="true">
+                            </div>
+                            <div class="form-group">
+                                <label for="email" th:text="#{persona.email}">Email</label>
+                                <input type="email" class="form-control" name="email" required="true">
+                            </div>
+                            <div class="form-group">
+                                <label for="sueldoQuincenal" th:text="#{persona.sueldoQuincenal}">Sueldo quincenal</label>
+                                <input type="number" class="form-control" name="sueldoQuincenal" required="true" step="any">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit" th:text="#{accion.guardar}">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

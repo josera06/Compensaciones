@@ -40,4 +40,14 @@ public class UsuarioService implements UserDetailsService {
 
         return new User(usuario.getUsername(), usuario.getPassword(), roles);
     }
+
+    @Transactional(readOnly=true)
+    public Usuario getTrabajadorByUsurario(String username) throws UsernameNotFoundException {
+        return usuarioDao.findByUsername(username);
+    }
+
+    @Transactional
+    public void guardaUsuario(Usuario usuario){
+        usuarioDao.save(usuario);
+    }
 }

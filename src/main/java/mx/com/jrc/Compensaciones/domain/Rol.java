@@ -20,4 +20,5 @@ public class Rol implements Serializable {
     private String nombre;
 
 
+
 }

@@ -1,8 +1,13 @@
 package mx.com.jrc.Compensaciones.web;
 
 import lombok.extern.slf4j.Slf4j;
+import mx.com.jrc.Compensaciones.domain.Rol;
 import mx.com.jrc.Compensaciones.domain.Trabajador;
+import mx.com.jrc.Compensaciones.domain.Usuario;
+import mx.com.jrc.Compensaciones.service.RolService;
 import mx.com.jrc.Compensaciones.service.TrabajadorService;
+import mx.com.jrc.Compensaciones.service.UsuarioService;
+import mx.com.jrc.Compensaciones.util.EncriptarPassword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
@@ -20,6 +25,20 @@ public class ControladorInicio {
 
     @Autowired
     private TrabajadorService trabajadorService;
+
+    @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
+    private RolService rolService;
+
+    @PostMapping("/guardarTrabajador")
+    public String guardaTrabajador(@Valid Trabajador trabajador, Errors errors){
+        if(errors.hasErrors()){
+            return "modificarTrabajador";
+        }
+        return "redirect:/trabajador";
+    }
 
     @GetMapping("/registroTrabajador")
     public String registroInicial(Trabajador trabajador) {
@@ -54,15 +73,6 @@ public class ControladorInicio {
         }
         trabajadorService.guardar(trabajador);
         return "redirect:/login";
-    }
-
-    @PostMapping("/guardarTrabajador")
-    public String guardaTrabajador(@Valid Trabajador trabajador, Errors errors){
-        if(errors.hasErrors()){
-            return "modificarTrabajador";
-        }
-        trabajadorService.guardar(trabajador);
-        return "redirect:/";
     }
 
     @GetMapping("/editarTrabajador/{idTrabajador}")

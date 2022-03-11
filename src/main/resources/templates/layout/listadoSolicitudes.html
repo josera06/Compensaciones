@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de solicitudes</title>
+</head>
+<body>
+<section th:fragment="listadoSolicitudes" id="solicitudes">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>[[#{persona.titulo-lista}]]</h4>
+                    </div>
+                    <div th:if="${solicitudes != null and !solicitudes.empty}">
+                        <table class="table table-stryped">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Numero de control</th>
+                                <th>Importe quincenal</th>
+                                <th>Editar</th>
+                                <th>Eliminar</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="solicitud, contador : ${solicitudes}">
+                                <td>[[${contador.count}]]</td>
+                                <td th:text="${solicitud.numeroControl}"></td>
+                                <td th:text="${solicitud.importeQuincenal}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center p-2" th:if="${solicitudes == null or solicitudes.empty}">
+                        <span th:text="#{persona.lista-vacia}">Lista vacía</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

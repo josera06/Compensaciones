@@ -2,6 +2,7 @@ package mx.com.jrc.Compensaciones.service;
 
 import mx.com.jrc.Compensaciones.domain.Solicitud;
 import mx.com.jrc.Compensaciones.domain.Trabajador;
+import mx.com.jrc.Compensaciones.domain.Usuario;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -18,5 +19,7 @@ public interface TrabajadorService {
     public void eliminar(Trabajador trabajador);
 
     public Trabajador encontrar(Trabajador trabajador);
+
+    public Trabajador encontrar(Usuario usuario);
 
 }

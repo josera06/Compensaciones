@@ -26,14 +26,14 @@ public class Solicitud {
     private String matricula;
     private String concepto;
     private String incUnidades;
-    private BigDecimal incImporte;
+    private double incImporte;
     private String incQuincenaInicial;
     private String incQuincenaFinal;
     private String incNoControl;
     private String incCifraControl;
     private String incResponsableReporte;
     private String retroUnidades;
-    private BigDecimal retroImporte;
+    private double retroImporte;
     private String retroQuincenaInicial;
     private String retroQuincenaFinal;
     private String retroNoControl;

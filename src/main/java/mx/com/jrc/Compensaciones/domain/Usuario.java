@@ -27,4 +27,8 @@ public class Usuario implements Serializable {
     @JoinColumn(name="id_usuario")
     private List<Rol> roles;
 
+    @OneToOne
+    @NotEmpty
+    @JoinColumn(name="id_trabajador")
+    private Long idTragajador;
 }

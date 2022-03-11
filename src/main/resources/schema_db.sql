@@ -50,7 +50,7 @@ CREATE DATABASE projects;
 CREATE SCHEMA compensaciones;
 CREATE USER compensacion WITH password '1234';
 alter user compensacion with encrypted password '1234' login;
-GRANT USAGE ON SCHEMA compensaciones TO compensacion;
+GRANT USAGE ON SCHEMA compensaciones TO usercomp;
 SET search_path TO compensacion;
 ALTER ROLE compensacion SET search_path TO compensaciones;
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA compensaciones TO usercomp;

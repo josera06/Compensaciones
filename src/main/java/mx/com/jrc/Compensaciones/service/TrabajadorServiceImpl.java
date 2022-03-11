@@ -2,6 +2,7 @@ package mx.com.jrc.Compensaciones.service;
 
 import mx.com.jrc.Compensaciones.dao.TrabajadorDAO;
 import mx.com.jrc.Compensaciones.domain.Trabajador;
+import mx.com.jrc.Compensaciones.domain.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,4 +50,11 @@ public class TrabajadorServiceImpl implements TrabajadorService{
     public Trabajador encontrar(Trabajador trabajador) {
         return trabajadorDAO.findById(trabajador.getIdTrabajador()).orElse(null);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Trabajador encontrar(Usuario usuario) {
+        return trabajadorDAO.getTrabajadorByUsuario(usuario);
+    }
+
 }

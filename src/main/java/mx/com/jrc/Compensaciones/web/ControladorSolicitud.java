@@ -38,7 +38,7 @@ public class ControladorSolicitud {
     public String guardaSolicitud(@Valid Solicitud solicitud,@AuthenticationPrincipal User user){
         var usuario = usuarioService.getTrabajadorByUsurario(user.getUsername());
         solicitud.setFecha(new java.sql.Timestamp(new Date().getTime()));
-        solicitud.setIdTrabajador(usuario.getIdTrabajador());
+        //solicitud.setIdTrabajador(usuario.getIdTrabajador());
         solicitudService.guardar(solicitud);
         return "redirect:/solicitud";
     }

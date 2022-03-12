@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @Entity
@@ -14,6 +15,7 @@ public class Trabajador {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_trabajador")
     private Long idTrabajador;
 
     @NotEmpty
@@ -35,4 +37,12 @@ public class Trabajador {
     private String email;
     private String telefono;
     private boolean confirmado;
+
+    //@JoinColumn(name="id_solicitud")
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Solicitud> solicitudes;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="id_usuario", referencedColumnName = "id_usuario")
+    private Usuario usuario;
 }

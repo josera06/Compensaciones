@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -29,14 +31,30 @@ public class ControladorInicio {
     @Autowired
     private UsuarioService usuarioService;
 
-    @Autowired
-    private RolService rolService;
 
     @PostMapping("/guardarTrabajador")
     public String guardaTrabajador(@Valid Trabajador trabajador, Errors errors){
         if(errors.hasErrors()){
             return "modificarTrabajador";
         }
+        List<Rol> roles = new ArrayList<>();
+        Rol rol = new Rol();
+        rol.setNombre("ROLE_USER");
+        roles.add(rol);
+
+        var password = "123";//EncriptarPassword.generaPassword(6);
+        log.info("Password: " + password);
+
+
+        Usuario usuario = new Usuario();
+        usuario.setUsername(trabajador.getEmail());
+        usuario.setPassword(EncriptarPassword.encriptarPassword(password));
+        usuario.setRoles(roles);
+        usuario.setTrabajador(trabajador);
+        usuarioService.guardaUsuario(usuario);
+
+        log.info("Trabajador a insertar: " + trabajador);
+        //trabajadorService.guardar(trabajador);
         return "redirect:/trabajador";
     }
 
@@ -64,15 +82,6 @@ public class ControladorInicio {
     public String inicio(Model model, @AuthenticationPrincipal User user) {
         log.info("usuario que hizo login: " + user);
         return "index";
-    }
-
-    @PostMapping("/guardarRegistroTrabajador")
-    public String guardaRegistroTrabajador(@Valid Trabajador trabajador, Errors errors){
-        if(errors.hasErrors()){
-            return "registroTrabajador";
-        }
-        trabajadorService.guardar(trabajador);
-        return "redirect:/login";
     }
 
     @GetMapping("/editarTrabajador/{idTrabajador}")

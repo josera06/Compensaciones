@@ -14,11 +14,14 @@ public class Rol implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_rol")
     private Long idRol;
 
     @NotEmpty
     private String nombre;
 
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="id_usuario", referencedColumnName = "id_usuario")
+    private Usuario usuario;
 
 }

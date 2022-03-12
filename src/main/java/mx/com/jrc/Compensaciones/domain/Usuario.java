@@ -15,6 +15,7 @@ public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario")
     private Long idUsuario;
 
     @NotEmpty
@@ -23,10 +24,11 @@ public class Usuario implements Serializable {
     @NotEmpty
     private String password;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="id_usuario")
     private List<Rol> roles;
 
-    @NotEmpty
-    private Long idTrabajador;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="id_trabajador", referencedColumnName = "id_trabajador")
+    private Trabajador trabajador;
 }

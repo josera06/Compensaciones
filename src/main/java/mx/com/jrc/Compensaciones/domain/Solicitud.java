@@ -16,8 +16,13 @@ public class Solicitud {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_solicitud")
     private Long idSolicitud;
-    private Long idTrabajador;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="id_trabajador", referencedColumnName = "id_trabajador")
+    private Trabajador trabajador;
+
     private Timestamp fecha;
     private String numeroControl;
     private BigDecimal importeQuincenal;

@@ -22,7 +22,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/report")
 public class ReporteController {
-
+    //http://localhost:8080/report/ventas/download?confirmado=true&tipo=PDF
     @Autowired
     private ReporteTrabajadoresService reporteTrabajadoresService;
 

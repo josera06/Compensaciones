@@ -4,13 +4,11 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/plantilla :: head">
     <meta charset="UTF-8">
-    <title>Control de solicitudes</title>
+    <title>Datos de la solicitud</title>
 </head>
 <body>
 <header th:replace="layout/plantilla :: header"></header>
-<section th:replace="layout/botonesAgregar :: botonAgregarSolicitud"></section>
-<section th:replace="layout/listadoSolicitudes :: listadoSolicitudes"></section>
-<section th:replace="layout/agregarSolicitud :: agregarSolicitud"></section>
+<section th:replace="layout/editarSolicitud :: editarSolicitud"></section>
 <footer th:replace="layout/plantilla :: footer"></footer>
 </body>
 </html>

@@ -7,8 +7,8 @@
     <title>Solicitud de compensaciones</title>
 </head>
 <body>
-<header th:replace="layout/plantilla :: header"></header>
-    <a th:href="@{/solicitud}">Solicitud</a>
+    <header th:replace="layout/plantilla :: header"></header>
+    <section th:replace="layout/botonesAgregar :: botonSeccionSolicitud"></section>
 
     <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/trabajador}">Trabajador</a>
     <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/adscripcion}">Adscripcion</a>

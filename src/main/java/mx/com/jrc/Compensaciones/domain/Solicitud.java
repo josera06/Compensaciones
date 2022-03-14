@@ -28,7 +28,6 @@ public class Solicitud {
     private BigDecimal importeQuincenal;
     private Date fecIni;
     private String observaciones;
-    private String matricula;
     private String concepto;
     private String incUnidades;
     private double incImporte;

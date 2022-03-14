@@ -10,13 +10,13 @@
 <section th:fragment="listadoSolicitudes" id="solicitudes">
     <div class="container">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>[[#{persona.titulo-lista}]]</h4>
+                        <h4>[[#{solicitud.titulo-lista}]]</h4>
                     </div>
                     <div th:if="${solicitudes != null and !solicitudes.empty}">
-                        <table class="table table-stryped">
+                        <table class="table table-stryped" id="lista-solicitudes">
                             <thead class="thead-dark">
                             <tr>
                                 <th>#</th>
@@ -32,6 +32,24 @@
                                 <td>[[${contador.count}]]</td>
                                 <td th:text="${solicitud.numeroControl}"></td>
                                 <td th:text="${solicitud.importeQuincenal}"></td>
+                                <td>
+                                    <a th:href="@{/reporteSolicitud/} + ${solicitud.idSolicitud}"
+                                       class="btn btn-secondary">
+                                        <i class="fas fa-download"></i> [[#{accion.descargar}]]
+                                    </a>
+                                </td>
+                                <td>
+                                    <a th:href="@{/editarSolicitud/} + ${solicitud.idSolicitud}"
+                                       class="btn btn-secondary">
+                                        <i class="fas fa-angle-double-right"></i> [[#{accion.editar}]]
+                                    </a>
+                                </td>
+                                <td>
+                                    <a th:href="@{/eliminarSolicitud/} + ${solicitud.idSolicitud}"
+                                       class="btn btn-dark">
+                                        <i class="fas fa-angle-double-right"></i> [[#{accion.eliminar}]]
+                                    </a>
+                                </td>
                             </tr>
                             </tbody>
                         </table>

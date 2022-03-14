@@ -38,7 +38,7 @@ public class Trabajador {
     private String telefono;
     private boolean confirmado;
 
-    //@JoinColumn(name="id_solicitud")
+    @JoinColumn(name="id_solicitud")
     @OneToMany(cascade = CascadeType.ALL)
     private List<Solicitud> solicitudes;
 

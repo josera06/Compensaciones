@@ -18,6 +18,25 @@
             </div>
         </div>
     </section>
+    <section th:fragment="botonSeccionSolicitud" class="py-4 mb-4 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <a th:href="@{/solicitud}"
+                       class="btn btn-success">
+                        <i class="fas fa-sticky-note"></i> [[#{accion.seccionSolicitud}]]
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a th:href="@{/solicitud}"
+                       class="btn btn-danger">
+                        <i class="fas fa-edit"></i> [[#{accion.editarPerfiles}]]
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
         <div class="container">
             <div class="row">

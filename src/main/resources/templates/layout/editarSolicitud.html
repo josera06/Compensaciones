@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/plantilla :: head">
+    <meta charset="UTF-8">
+    <title>Editar solicitud</title>
+</head>
+<body>
+<section th:fragment="editarSolicitud">
+    <form th:action="@{/guardarSolicitud}" th:object="${solicitud}"
+          method="post" class="was-validated">
+        <input type="hidden" name="idSolicitud" th:field="*{idSolicitud}"/>
+        <section th:replace="layout/botonesEditar :: botonesEditarSolicitud"></section>
+        <div id="details">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>[[#{accion.editar}]]</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="numeroControl">[[#{solicitud.numeroControl}]]</label>
+                                    <input type="number" class="form-control" name="numeroControl"
+                                           required="true" th:field="*{numeroControl}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="importeQuincenal">[[#{solicitud.importeQuincenal}]]</label>
+                                    <input type="text" class="form-control" name="importeQuincenal"
+                                           required="true" th:field="*{importeQuincenal}" step="any"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+</body>
+</html>

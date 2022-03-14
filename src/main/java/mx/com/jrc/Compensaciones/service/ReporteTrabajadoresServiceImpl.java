@@ -25,7 +25,8 @@ public class ReporteTrabajadoresServiceImpl implements ReporteTrabajadoresServic
 
     @Override
     public ReporteTrabajadoresDTO obtenerReporte(Map<String, Object> params) throws SQLException, JRException, IOException {
-        String filename="listaTrabajadores";
+        //String filename="listaTrabajadores";
+        var filename = params.get("filename").toString();
         String extension = params.get("tipo").toString().equalsIgnoreCase(TipoReporteEnum.EXCEL.name()) ? ".xlsx" : ".pdf";
         var dto = new ReporteTrabajadoresDTO();
         dto.setFileName(filename+extension);

@@ -2,8 +2,10 @@ package mx.com.jrc.Compensaciones.web;
 
 import lombok.extern.slf4j.Slf4j;
 import mx.com.jrc.Compensaciones.domain.Solicitud;
+import mx.com.jrc.Compensaciones.domain.Trabajador;
 import mx.com.jrc.Compensaciones.service.ReporteTrabajadoresService;
 import mx.com.jrc.Compensaciones.service.SolicitudService;
+import mx.com.jrc.Compensaciones.service.TrabajadorService;
 import mx.com.jrc.Compensaciones.service.UsuarioService;
 import mx.com.jrc.Compensaciones.util.TipoReporteEnum;
 import net.sf.jasperreports.engine.JRException;
@@ -28,6 +30,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.sun.activation.registries.LogSupport.log;
+
 @Controller
 @Slf4j
 public class ControladorSolicitud {
@@ -38,12 +42,19 @@ public class ControladorSolicitud {
     private UsuarioService usuarioService;
 
     @Autowired
+    private TrabajadorService trabajadorService;
+
+    @Autowired
     private ReporteTrabajadoresService reporteTrabajadoresService;
 
-    @GetMapping("/solicitud")
-    public String inicioSolicitud(Model model) {
-        var solicitudes = solicitudService.listarSolicitud();
-        model.addAttribute("solicitudes", solicitudes);
+    @GetMapping("/solicitud/{idTrabajador}")
+    public String inicioSolicitud(Trabajador trabajador, Model model) {
+        trabajador = trabajadorService.encontrar(trabajador);
+        //var solicitudes = solicitudService.listarSolicitudPorTrabajador(trabajador);
+        log.info("Solicitudes: *****************************************************************************" + trabajador);
+        /*var solicitudes = trabajador.getSolicitudes();
+        log("Solicitudes: *****************************************************************************" + solicitudes);
+        model.addAttribute("solicitudes", solicitudes);*/
         return "solicitud";
     }
 
@@ -52,9 +63,9 @@ public class ControladorSolicitud {
         var usuario = usuarioService.getTrabajadorByUsurario(user.getUsername());
         solicitud.setFecha(new java.sql.Timestamp(new Date().getTime()));
         solicitud.setTrabajador(usuario.getTrabajador());
-        log.info("Solicitud a guardar: " + solicitud);
+        ControladorSolicitud.log.info("Solicitud a guardar: " + solicitud);
         solicitudService.guardar(solicitud);
-        return "redirect:/solicitud";
+        return "redirect:/solicitud/"+usuario.getTrabajador().getIdTrabajador();
     }
 
     @GetMapping("/eliminarSolicitud/{idSolicitud}")
@@ -73,7 +84,7 @@ public class ControladorSolicitud {
     @GetMapping("/reporteSolicitud/{idSolicitud}")
     public ResponseEntity<Resource> download(Solicitud solicitud) throws JRException, SQLException, IOException {
         solicitud = solicitudService.encontrar(solicitud);
-        log.info("Solicitud: " + solicitud.toString());
+        ControladorSolicitud.log.info("Solicitud: " + solicitud.toString());
 
         Map<String,Object> params= new HashMap<String, Object>();
         params.put("confirmado",true);

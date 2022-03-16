@@ -38,11 +38,6 @@ public class Trabajador {
     private String telefono;
     private boolean confirmado;
 
-    @JoinColumn(name="id_solicitud")
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "trabajador",fetch = FetchType.LAZY)
     private List<Solicitud> solicitudes;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="id_usuario", referencedColumnName = "id_usuario")
-    private Usuario usuario;
 }

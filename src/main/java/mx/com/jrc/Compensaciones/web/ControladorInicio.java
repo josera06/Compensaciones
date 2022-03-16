@@ -43,9 +43,6 @@ public class ControladorInicio {
         roles.add(rol);
 
         var password = "123";//EncriptarPassword.generaPassword(6);
-        log.info("Password: " + password);
-
-
         Usuario usuario = new Usuario();
         usuario.setUsername(trabajador.getEmail());
         usuario.setPassword(EncriptarPassword.encriptarPassword(password));
@@ -53,8 +50,6 @@ public class ControladorInicio {
         usuario.setTrabajador(trabajador);
         usuarioService.guardaUsuario(usuario);
 
-        log.info("Trabajador a insertar: " + trabajador);
-        //trabajadorService.guardar(trabajador);
         return "redirect:/trabajador";
     }
 
@@ -79,9 +74,11 @@ public class ControladorInicio {
     }
 
     @GetMapping("/")
-    public String inicio(Model model, @AuthenticationPrincipal User user) {
-        log.info("usuario que hizo login: " + user);
+    public String inicio(Trabajador trabajador,Model model, @AuthenticationPrincipal User user) {
+        Usuario usuario = usuarioService.getTrabajadorByUsurario(user.getUsername());
+        model.addAttribute("trabajador",usuario.getTrabajador());
         return "index";
+
     }
 
     @GetMapping("/editarTrabajador/{idTrabajador}")

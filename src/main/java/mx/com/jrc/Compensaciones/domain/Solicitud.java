@@ -19,8 +19,8 @@ public class Solicitud {
     @Column(name = "id_solicitud")
     private Long idSolicitud;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="id_trabajador", referencedColumnName = "id_trabajador")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="id_trabajador")
     private Trabajador trabajador;
 
     private Timestamp fecha;

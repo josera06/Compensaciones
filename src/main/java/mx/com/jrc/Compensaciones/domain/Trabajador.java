@@ -38,6 +38,4 @@ public class Trabajador {
     private String telefono;
     private boolean confirmado;
 
-    @OneToMany(mappedBy = "trabajador",fetch = FetchType.LAZY)
-    private List<Solicitud> solicitudes;
 }

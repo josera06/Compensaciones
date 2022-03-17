@@ -50,11 +50,7 @@ public class ControladorSolicitud {
     @GetMapping("/solicitud/{idTrabajador}")
     public String inicioSolicitud(Trabajador trabajador, Model model) {
         trabajador = trabajadorService.encontrar(trabajador);
-        //var solicitudes = solicitudService.listarSolicitudPorTrabajador(trabajador);
-        log.info("Solicitudes: *****************************************************************************" + trabajador);
-        /*var solicitudes = trabajador.getSolicitudes();
-        log("Solicitudes: *****************************************************************************" + solicitudes);
-        model.addAttribute("solicitudes", solicitudes);*/
+        model.addAttribute("solicitudes",solicitudService.listarSolicitudPorTrabajador(trabajador));
         return "solicitud";
     }
 
@@ -69,9 +65,10 @@ public class ControladorSolicitud {
     }
 
     @GetMapping("/eliminarSolicitud/{idSolicitud}")
-    public String eliminarSolicitud(Solicitud solicitud){
+    public String eliminarSolicitud(Solicitud solicitud,@AuthenticationPrincipal User user){
+        var usuario = usuarioService.getTrabajadorByUsurario(user.getUsername());
         solicitudService.eliminar(solicitud);
-        return "redirect:/solicitud";
+        return "redirect:/solicitud/"+usuario.getTrabajador().getIdTrabajador();
     }
 
     @GetMapping("/editarSolicitud/{idSolicitud}")

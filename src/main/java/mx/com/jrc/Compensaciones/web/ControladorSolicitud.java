@@ -81,12 +81,12 @@ public class ControladorSolicitud {
     @GetMapping("/reporteSolicitud/{idSolicitud}")
     public ResponseEntity<Resource> download(Solicitud solicitud) throws JRException, SQLException, IOException {
         solicitud = solicitudService.encontrar(solicitud);
-        ControladorSolicitud.log.info("Solicitud: " + solicitud.toString());
+        log.info("Solicitud: " + solicitud.toString());
 
         Map<String,Object> params= new HashMap<String, Object>();
-        params.put("confirmado",true);
+        params.put("id_solicitud",solicitud.getIdSolicitud());
         params.put("tipo","PDF");
-        params.put("filename","listaTrabajadores");
+        params.put("filename","solicitud");
 
         var dto = reporteTrabajadoresService.obtenerReporte(params);
         var streamResource = new InputStreamResource(dto.getStream());

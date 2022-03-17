@@ -110,6 +110,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>imss-compensaciones</finalName>
 	</build>
 
 </project>

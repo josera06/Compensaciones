@@ -53,6 +53,12 @@ public class ControladorInicio {
         return "redirect:/trabajador";
     }
 
+    @PostMapping("/guardarModificacionTrabajador")
+    public String guardaModificacionTrabajador(@Valid Trabajador trabajador, Errors errors){
+        trabajadorService.guardar(trabajador);
+        return "redirect:/trabajador";
+    }
+
     @GetMapping("/registroTrabajador")
     public String registroInicial(Trabajador trabajador) {
         log.info("Página para registro de nuevo trabajador");

@@ -8,7 +8,7 @@
 </head>
 <body>
 <section th:fragment="editarTrabajador">
-    <form th:action="@{/guardarTrabajador}" th:object="${trabajador}"
+    <form th:action="@{/guardarModificacionTrabajador}" th:object="${trabajador}"
           method="post" class="was-validated">
         <input type="hidden" name="idTrabajador" th:field="*{idTrabajador}"/>
         <section th:replace="layout/botonesEditar :: botonesEditar"></section>
@@ -42,9 +42,44 @@
                                            required="true" th:field="*{email}"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="sueldoQuincenal">[[#{persona.sueldoQuincenal}]]</label>
-                                    <input type="number" class="form-control" name="sueldoQuincenal"
-                                           required="true" th:field="*{sueldoQuincenal}" step="any"/>
+                                    <label for="matricula">Matricula:</label>
+                                    <input type="text" class="form-control" name="matricula" th:field="*{matricula}" required="true"/>
+                                </div>
+                                <div class="form-group">
+                                        <label for="categoria">Categoría:</label>
+                                        <input type="text" class="form-control" name="categoria" th:field="*{categoria}" required="true"/>
+                                </div>
+                                <div class="form-group">
+                                        <label for="sueldoQuincenal">Sueldo quincenal:</label>
+                                        <input type="number" class="form-control" name="sueldoQuincenal" th:field="*{sueldoQuincenal}" step="any" required="true"/>
+                                </div>
+                                <div class="form-group">
+                                        <label for="horarioDiscontinuo">Horario discontinuo:</label>
+                                        <input type="checkbox" class="form-control" name="horarioDiscontinuo" th:field="*{horarioDiscontinuo}"/>
+                                </div>
+                                <div class="form-group">
+                                        <label for="calle">Calle:</label>
+                                        <input type="text" class="form-control" name="calle" th:field="*{calle}" required="true"/>
+                                </div>
+                                <div class="form-group">
+                                        <label for="colonia">Colonia:</label>
+                                        <input type="text" class="form-control" name="colonia" th:field="*{colonia}" required="true"/>
+                                </div>
+                                <div class="form-group">
+                                        <label for="codigoPostal">Código postal:</label>
+                                        <input type="text" class="form-control" name="codigoPostal" th:field="*{codigoPostal}" required="true"/>
+                                </div>
+                                <div class="form-group">
+                                        <label for="municipio">Municipio:</label>
+                                        <input type="text" class="form-control" name="municipio" th:field="*{municipio}" required="true"/>
+                                </div>
+                                <div class="form-group">
+                                        <label for="estado">Estado:</label>
+                                        <input type="text" class="form-control" name="estado" th:field="*{estado}" required="true"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="telefono">Teléfono:</label>
+                                    <input type="text" class="form-control" name="telefono" th:field="*{telefono}" />
                                 </div>
                             </div>
                         </div>

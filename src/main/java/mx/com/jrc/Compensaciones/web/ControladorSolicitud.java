@@ -86,7 +86,7 @@ public class ControladorSolicitud {
         Map<String,Object> params= new HashMap<String, Object>();
         params.put("id_solicitud",solicitud.getIdSolicitud());
         params.put("tipo","PDF");
-        params.put("filename","solicitud");
+        params.put("filename","solicitud2");
 
         var dto = reporteTrabajadoresService.obtenerReporte(params);
         var streamResource = new InputStreamResource(dto.getStream());

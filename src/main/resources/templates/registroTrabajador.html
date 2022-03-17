@@ -27,6 +27,36 @@
         <input type="text" name="email" th:field="*{email}"/>
         <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error en usuario</span>
         <br/>
+        <label for="matricula">Matricula:</label>
+        <input type="text" name="matricula" th:field="*{matricula}"/>
+        <br/>
+        <label for="categoria">Categoría:</label>
+        <input type="text" name="categoria" th:field="*{categoria}"/>
+        <br/>
+        <label for="sueldoQuincenal">Sueldo quincenal:</label>
+        <input type="number" name="sueldoQuincenal" th:field="*{sueldoQuincenal}" step="any"/>
+        <br/>
+        <label for="horarioDiscontinuo">Horario discontinuo:</label>
+        <input type="checkbox" name="horarioDiscontinuo" th:field="*{horarioDiscontinuo}"/>
+        <br/>
+        <label for="calle">Calle:</label>
+        <input type="text" name="calle" th:field="*{calle}"/>
+        <br/>
+        <label for="colonia">Colonia:</label>
+        <input type="text" name="colonia" th:field="*{colonia}"/>
+        <br/>
+        <label for="codigoPostal">Código postal:</label>
+        <input type="text" name="codigoPostal" th:field="*{codigoPostal}"/>
+        <br/>
+        <label for="municipio">Municipio:</label>
+        <input type="text" name="municipio" th:field="*{municipio}"/>
+        <br/>
+        <label for="estado">Estado:</label>
+        <input type="text" name="estado" th:field="*{estado}"/>
+        <br/>
+        <label for="telefono">Teléfono:</label>
+        <input type="text" name="telefono" th:field="*{telefono}"/>
+        <br/>
         <input type="submit" name="guardar" value="Guardar" />
     </form>
 </body>

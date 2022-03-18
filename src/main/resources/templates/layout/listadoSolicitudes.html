@@ -19,9 +19,9 @@
                         <table class="table table-stryped" id="lista-solicitudes">
                             <thead class="thead-dark">
                             <tr>
-                                <th>#</th>
                                 <th>Numero de control</th>
-                                <th>Importe quincenal</th>
+                                <th>Fecha</th>
+                                <th>Observaciones</th>
                                 <th>Formato</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
@@ -29,9 +29,9 @@
                             </thead>
                             <tbody>
                             <tr th:each="solicitud, contador : ${solicitudes}">
-                                <td>[[${contador.count}]]</td>
-                                <td th:text="${solicitud.numeroControl}"></td>
-                                <td th:text="${solicitud.importeQuincenal}"></td>
+                                <td th:text="${solicitud.idSolicitud}"></td>
+                                <td th:text="${solicitud.fecha}"></td>
+                                <td th:text="${solicitud.observaciones}"></td>
                                 <td>
                                     <a th:href="@{/reporteSolicitud/} + ${solicitud.idSolicitud}"
                                        class="btn btn-secondary">

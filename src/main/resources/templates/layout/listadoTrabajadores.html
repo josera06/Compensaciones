@@ -38,19 +38,19 @@
                                     <td th:text="${trabajador.email}"></td>
 
                                     <td>
-                                        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/confirmarTrabajador/} + ${trabajador.idTrabajador}"
+                                        <a th:href="@{/confirmarTrabajador/} + ${trabajador.idTrabajador}"
                                            class="btn btn-secondary">
                                             <i class="fas fa-angle-double-right"></i> [[#{accion.confirmar}]]
                                         </a>
                                     </td>
                                     <td>
-                                        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editarTrabajador/} + ${trabajador.idTrabajador}"
+                                        <a th:href="@{/editarTrabajador/} + ${trabajador.idTrabajador}"
                                            class="btn btn-secondary">
                                             <i class="fas fa-angle-double-right"></i> [[#{accion.editar}]]
                                         </a>
                                     </td>
                                     <td>
-                                        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/eliminarTrabajador/} + ${trabajador.idTrabajador}"
+                                        <a th:href="@{/eliminarTrabajador/} + ${trabajador.idTrabajador}"
                                            class="btn btn-dark">
                                             <i class="fas fa-angle-double-right"></i> [[#{accion.eliminar}]]
                                         </a>

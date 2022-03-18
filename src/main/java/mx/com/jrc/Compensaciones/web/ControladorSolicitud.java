@@ -19,6 +19,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -79,14 +81,15 @@ public class ControladorSolicitud {
     }
 
     @GetMapping("/reporteSolicitud/{idSolicitud}")
-    public ResponseEntity<Resource> download(Solicitud solicitud) throws JRException, SQLException, IOException {
+    public ResponseEntity<Resource> download(Solicitud solicitud, HttpServletRequest request) throws JRException, SQLException, IOException {
         solicitud = solicitudService.encontrar(solicitud);
-        log.info("Solicitud: " + solicitud.toString());
 
         Map<String,Object> params= new HashMap<String, Object>();
         params.put("id_solicitud",solicitud.getIdSolicitud());
         params.put("tipo","PDF");
-        params.put("filename","solicitud2");
+        params.put("filename","solicitud");
+        //params.put("IMG_DIR","http://localhost:8585/img/");
+        //params.put("IMG_DIR","static/img/");
 
         var dto = reporteTrabajadoresService.obtenerReporte(params);
         var streamResource = new InputStreamResource(dto.getStream());
@@ -98,7 +101,6 @@ public class ControladorSolicitud {
         }
         return ResponseEntity.ok().header("Content-Disposition","inline: filename=\"" + dto.getFileName()+"\"")
                 .contentLength(dto.getLength()).contentType(mediaType).body(streamResource);
-        //return null;
     }
 
 }

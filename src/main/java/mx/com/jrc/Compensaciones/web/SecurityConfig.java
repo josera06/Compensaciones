@@ -25,9 +25,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/trabajador","/editarTrabajador/**", "/agregarTrabajador/**", "/eliminarTrabajador")
+                .antMatchers("/trabajador", "/agregarTrabajador/**", "/eliminarTrabajador")
                 .hasRole("ADMIN")          //Usuarios que SI entran a las páginas anteriores
-                .antMatchers("/","/trabajador")
+                .antMatchers("/","/trabajador","/editarTrabajador/**")
                 .hasAnyRole("ADMIN","USER")
                 .and()
                 .formLogin()

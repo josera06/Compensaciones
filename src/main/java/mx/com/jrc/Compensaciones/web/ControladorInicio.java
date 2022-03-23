@@ -48,9 +48,13 @@ public class ControladorInicio {
         usuario.setPassword(EncriptarPassword.encriptarPassword(password));
         usuario.setRoles(roles);
         usuario.setTrabajador(trabajador);
-        usuarioService.guardaUsuario(usuario);
+        try{
+            usuarioService.guardaUsuario(usuario);
+        }catch (Exception e){
+            log.info("Exception: " + e.getMessage());
+        }
 
-        return "redirect:/trabajador";
+        return "redirect:/";
     }
 
     @PostMapping("/guardarModificacionTrabajador")

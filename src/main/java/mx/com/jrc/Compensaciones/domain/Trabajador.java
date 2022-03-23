@@ -34,6 +34,7 @@ public class Trabajador {
     private String municipio;
     private String estado;
     @Email
+    @Column(unique=true)
     private String email;
     private String telefono;
     private boolean confirmado;

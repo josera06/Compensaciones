@@ -18,7 +18,7 @@
                         </button>
                     </div>
                     <form th:action="@{/guardarTrabajador}" th:object="${trabajador}"
-                          method="post" class="was-validated">
+                          method="post" class="was-validated" id="frmAgregaTrabajador">
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="nombre" th:text="#{persona.nombre}">Nombre</label>
@@ -78,7 +78,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-primary" type="submit" th:text="#{accion.guardar}">Guardar</button>
+                            <button class="btn btn-primary" type="button" th:text="#{accion.guardar}" id="btnAgregaTrabajador">Guardar</button>
                         </div>
                     </form>
                 </div>

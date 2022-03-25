@@ -7,6 +7,7 @@ import mx.com.jrc.Compensaciones.domain.Usuario;
 import mx.com.jrc.Compensaciones.service.RolService;
 import mx.com.jrc.Compensaciones.service.TrabajadorService;
 import mx.com.jrc.Compensaciones.service.UsuarioService;
+import mx.com.jrc.Compensaciones.util.CorreoElectronico;
 import mx.com.jrc.Compensaciones.util.EncriptarPassword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -42,12 +43,20 @@ public class ControladorInicio {
         rol.setNombre("ROLE_USER");
         roles.add(rol);
 
-        var password = "123";//EncriptarPassword.generaPassword(6);
+        var password = EncriptarPassword.generaPassword(4);
         Usuario usuario = new Usuario();
         usuario.setUsername(trabajador.getEmail());
         usuario.setPassword(EncriptarPassword.encriptarPassword(password));
         usuario.setRoles(roles);
         usuario.setTrabajador(trabajador);
+        CorreoElectronico correo = new CorreoElectronico();
+        var cuerpoCorreo = "Se ha registrado en el sistema de compensaciones. " +
+                "\nURL DE ACCESO: http://54.87.100.231" +
+                "\n" +
+                "\n\t\tUSUARIO: " + trabajador.getEmail()+ "" +
+                "\n\t\tCONTRASEÑA: " + password;
+        correo.enviarConGMail(trabajador.getEmail(),"Cuenta de compensaciones",cuerpoCorreo);
+        log.info("Correo enviado: " + cuerpoCorreo);
         try{
             usuarioService.guardaUsuario(usuario);
         }catch (Exception e){

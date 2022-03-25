@@ -27,7 +27,7 @@ public class CorreoElectronico {
             message.setSubject(asunto);
             message.setText(cuerpo);
             Transport transport = session.getTransport("smtp");
-            transport.connect("smtp.gmail.com", remitente, "TI07sedra");
+            transport.connect("smtp.gmail.com", remitente, "987654");
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
         }

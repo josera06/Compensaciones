@@ -8,15 +8,21 @@ import java.util.Properties;
 public class CorreoElectronico {
     public void enviarConGMail(String destinatario, String asunto, String cuerpo) {
         // Esto es lo que va delante de @gmail.com en tu cuenta de correo. Es el remitente también.
-        String remitente = "desarrollo208@gmail.com";  //Para la dirección nomcuenta@gmail.com
+        //String remitente = "desarrollo208@gmail.com";  //Para la dirección nomcuenta@gmail.com
+        String remitente = "composiciones208@yahoo.com.mx";
+
+        var clave = "";
+        var servidorSMTP = "smtp.mail.yahoo.com"; //smtp.gmail.com El servidor SMTP de Google
 
         Properties props = System.getProperties();
-        props.put("mail.smtp.host", "smtp.gmail.com");  //El servidor SMTP de Google
+        //props.put("mail.smtp.host",
+        props.put("mail.smtp.host", servidorSMTP);  //El servidor SMTP de Google
         props.put("mail.smtp.user", remitente);
-        props.put("mail.smtp.clave", "miClaveDeGMail");    //La clave de la cuenta
+        props.put("mail.smtp.clave", clave);    //La clave de la cuenta
         props.put("mail.smtp.auth", "true");    //Usar autenticación mediante usuario y clave
         props.put("mail.smtp.starttls.enable", "true"); //Para conectar de manera segura al servidor SMTP
-        props.put("mail.smtp.port", "587"); //El puerto SMTP seguro de Google
+        //props.put("mail.smtp.port", "587"); //El puerto SMTP seguro de Google
+        props.put("mail.smtp.port", "465"); //El puerto SMTP seguro de Google
 
         Session session = Session.getDefaultInstance(props);
         MimeMessage message = new MimeMessage(session);
@@ -27,7 +33,7 @@ public class CorreoElectronico {
             message.setSubject(asunto);
             message.setText(cuerpo);
             Transport transport = session.getTransport("smtp");
-            transport.connect("smtp.gmail.com", remitente, "987654");
+            transport.connect(servidorSMTP, remitente, clave);
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
         }

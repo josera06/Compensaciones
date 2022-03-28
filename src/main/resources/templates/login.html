@@ -25,12 +25,18 @@
                     </div>
                     <div class="card-body">
                         <form method="post" th:action="@{/login}">
+                            <div th:if="${message}" class="alert alert-danger">
+                                <span th:text="${message}"></span>
+                            </div>
+                            <div  id="error-msg" th:if="${param.error}" class="alert alert-danger">
+                                Nombre de usuario y/o password invalidos
+                            </div>
                             <div class="form-group">
-                                <label for="username">Username:</label>
+                                <label for="username">Usuario:</label>
                                 <input type="text" name="username" id="username"/>
                             </div>
                             <div class="form-group">
-                                <label for="password">Password:</label>
+                                <label for="password">Contraseña:</label>
                                 <input type="password" name="password" id="password"/>
                             </div>
                             <input type="submit" value="Login" class="btn btn-primary btn-block"/>

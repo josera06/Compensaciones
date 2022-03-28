@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -32,43 +33,58 @@ public class ControladorInicio {
     @Autowired
     private UsuarioService usuarioService;
 
+    @GetMapping("/CorreoExisteError")
+    public String CorreoExisteError(){
+        return "redirect:/errores/CorreoExisteError";
+    }
 
     @PostMapping("/guardarTrabajador")
-    public String guardaTrabajador(@Valid Trabajador trabajador, Errors errors){
+    public String guardaTrabajador(@Valid Trabajador trabajador, Errors errors, RedirectAttributes ra){
         if(errors.hasErrors()){
             return "modificarTrabajador";
         }
-        List<Rol> roles = new ArrayList<>();
-        Rol rol = new Rol();
-        rol.setNombre("ROLE_USER");
-        roles.add(rol);
+        var message = "";
 
-        var password = EncriptarPassword.generaPassword(4);
-        Usuario usuario = new Usuario();
-        usuario.setUsername(trabajador.getEmail());
-        usuario.setPassword(EncriptarPassword.encriptarPassword(password));
-        usuario.setRoles(roles);
-        usuario.setTrabajador(trabajador);
-        CorreoElectronico correo = new CorreoElectronico();
-        var cuerpoCorreo = "Se ha registrado en el sistema de compensaciones. " +
-                "\nURL DE ACCESO: http://54.87.100.231" +
-                "\n" +
-                "\n\t\tUSUARIO: " + trabajador.getEmail()+ "" +
-                "\n\t\tCONTRASEÑA: " + password;
-        correo.enviarConGMail(trabajador.getEmail(),"Cuenta de compensaciones",cuerpoCorreo);
-        log.info("Correo enviado: " + cuerpoCorreo);
-        try{
-            usuarioService.guardaUsuario(usuario);
-        }catch (Exception e){
-            log.info("Exception: " + e.getMessage());
+        if(trabajadorService.existeTrabajadorPorEmail(trabajador) != null){
+            message = "¡El correo electrónico ya ha sido utilizado, por favor escriba otro!";
+        } else {
+            List<Rol> roles = new ArrayList<>();
+            Rol rol = new Rol();
+            rol.setNombre("ROLE_USER");
+            roles.add(rol);
+
+            var password = EncriptarPassword.generaPassword(4);
+            Usuario usuario = new Usuario();
+            usuario.setUsername(trabajador.getEmail());
+            usuario.setPassword(EncriptarPassword.encriptarPassword(password));
+            usuario.setRoles(roles);
+            usuario.setTrabajador(trabajador);
+            CorreoElectronico correo = new CorreoElectronico();
+            var cuerpoCorreo = "Se ha registrado en el sistema de compensaciones. " +
+                    "\nURL DE ACCESO: http://54.87.100.231" +
+                    "\n" +
+                    "\n\t\tUSUARIO: " + trabajador.getEmail()+ "" +
+                    "\n\t\tCONTRASEÑA: " + password;
+            try{
+                usuarioService.guardaUsuario(usuario);
+                correo.enviarConGMail(trabajador.getEmail(),"Cuenta de compensaciones",cuerpoCorreo);
+                message = "El registro se ha completado exitosamente, revise su correo para obtener usuario y contraseña";
+            }catch (Exception e){
+                log.info("Exception: " + e.getMessage());
+            }
         }
-
-        return "redirect:/";
+        log.info("Mensaje: " + message);
+        ra.addFlashAttribute("message", message);
+        return "redirect:/login";
     }
 
     @PostMapping("/guardarModificacionTrabajador")
     public String guardaModificacionTrabajador(@Valid Trabajador trabajador, Errors errors){
-        trabajadorService.guardar(trabajador);
+        if(errors.hasErrors()){
+            log.info("Error encontrado: " + errors.getAllErrors().toString());
+        } else {
+            trabajadorService.guardar(trabajador);
+        }
         return "redirect:/";
     }
 

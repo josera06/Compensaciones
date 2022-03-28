@@ -22,4 +22,5 @@ public interface TrabajadorService {
 
     public Trabajador encontrar(Usuario usuario);
 
+    public Trabajador existeTrabajadorPorEmail(Trabajador trabajador);
 }

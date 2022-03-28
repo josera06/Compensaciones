@@ -1,11 +1,11 @@
 $(document).ready(function(){
     console.log("HOLA");
-    swal({
-      buttons: {
-        cancel: true,
-        confirm: true,
-      },
-    });
+//    swal({
+//      buttons: {
+//        cancel: true,
+//        confirm: true,
+//      },
+//    });
 //                    swal({
 //                        title: 'Are you sure?sdf',
 //                        text: "You won't be able to revert this!",
@@ -24,15 +24,7 @@ $(document).ready(function(){
 //    $("#btnAgregaTrabajador").click(function(event){
 //        event.preventDefault();
 //        event.stopImmediatePropagation();
-//        swal({
-//            title: 'jQuery HTML example',
-//            html: $('<div>')
-//                .addClass('some-class')
-//                .text('jQuery is everywhere.'),
-//            animation: false,
-//            customClass: 'animated tada'
-//        })
-//        $("#frmAgregaTrabajador").submit(); // Submit the form
+//        $("#frmAgregaTrabajador").submit();
 //    });
 //        swal({
 //            title: 'Auto close alert!',

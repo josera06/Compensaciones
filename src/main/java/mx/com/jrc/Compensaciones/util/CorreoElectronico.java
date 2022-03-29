@@ -8,7 +8,7 @@ import java.util.Properties;
 public class CorreoElectronico {
     public void enviarConGMail(String destinatario, String asunto, String cuerpo) {
         // Esto es lo que va delante de @gmail.com en tu cuenta de correo. Es el remitente también.
-        String remitente = "desarrollo208@gmail.com";  //Para la dirección nomcuenta@gmail.com
+        String remitente = "compensaciones208@gmail.com";  //Para la dirección nomcuenta@gmail.com
         //String remitente = "composiciones208@yahoo.com.mx";
 
         var clave = "secret";

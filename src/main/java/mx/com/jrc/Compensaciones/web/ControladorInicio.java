@@ -44,6 +44,7 @@ public class ControladorInicio {
             return "modificarTrabajador";
         }
         var message = "";
+        var messageOK = "";
 
         if(trabajadorService.existeTrabajadorPorEmail(trabajador) != null){
             message = "¡El correo electrónico ya ha sido utilizado, por favor escriba otro!";
@@ -68,13 +69,17 @@ public class ControladorInicio {
             try{
                 usuarioService.guardaUsuario(usuario);
                 correo.enviarConGMail(trabajador.getEmail(),"Cuenta de compensaciones",cuerpoCorreo);
-                message = "El registro se ha completado exitosamente, revise su correo para obtener usuario y contraseña";
+                messageOK = "El registro se ha completado exitosamente, revise su correo para obtener usuario y contraseña";
             }catch (Exception e){
                 log.info("Exception: " + e.getMessage());
             }
         }
-        log.info("Mensaje: " + message);
-        ra.addFlashAttribute("message", message);
+        if(!message.equals("")){
+            ra.addFlashAttribute("message", message);
+        }
+        if(!messageOK.equals("")){
+            ra.addFlashAttribute("messageOK", messageOK);
+        }
         return "redirect:/login";
     }
 

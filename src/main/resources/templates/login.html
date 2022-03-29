@@ -25,6 +25,9 @@
                     </div>
                     <div class="card-body">
                         <form method="post" th:action="@{/login}">
+                            <div th:if="${messageOK}" class="alert alert-success">
+                                <span th:text="${messageOK}"></span>
+                            </div>
                             <div th:if="${message}" class="alert alert-danger">
                                 <span th:text="${message}"></span>
                             </div>

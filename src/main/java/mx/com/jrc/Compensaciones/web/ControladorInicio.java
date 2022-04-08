@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import mx.com.jrc.Compensaciones.domain.Rol;
 import mx.com.jrc.Compensaciones.domain.Trabajador;
 import mx.com.jrc.Compensaciones.domain.Usuario;
+import mx.com.jrc.Compensaciones.service.MailService;
 import mx.com.jrc.Compensaciones.service.RolService;
 import mx.com.jrc.Compensaciones.service.TrabajadorService;
 import mx.com.jrc.Compensaciones.service.UsuarioService;
@@ -12,6 +13,7 @@ import mx.com.jrc.Compensaciones.util.EncriptarPassword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.oauth2.common.util.RandomValueStringGenerator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -33,6 +35,9 @@ public class ControladorInicio {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private MailService mailService;
+
     @GetMapping("/CorreoExisteError")
     public String CorreoExisteError(){
         return "redirect:/errores/CorreoExisteError";
@@ -46,7 +51,14 @@ public class ControladorInicio {
         var message = "";
         var messageOK = "";
 
-        if(trabajadorService.existeTrabajadorPorEmail(trabajador) != null){
+        Trabajador trabajadorTemporarl = null;
+        try{
+            trabajadorTemporarl = trabajadorService.existeTrabajadorPorEmail(trabajador);
+        }catch (Exception e){
+            log.info("Error: "+e.getMessage());
+        }
+
+        if(trabajadorTemporarl != null) {
             message = "¡El correo electrónico ya ha sido utilizado, por favor escriba otro!";
         } else {
             List<Rol> roles = new ArrayList<>();
@@ -54,24 +66,31 @@ public class ControladorInicio {
             rol.setNombre("ROLE_USER");
             roles.add(rol);
 
-            var password = EncriptarPassword.generaPassword(4);
+            RandomValueStringGenerator generator = new RandomValueStringGenerator();
+            generator.setLength(4);
+            var password = generator.generate();
+
             Usuario usuario = new Usuario();
             usuario.setUsername(trabajador.getEmail());
             usuario.setPassword(EncriptarPassword.encriptarPassword(password));
             usuario.setRoles(roles);
             usuario.setTrabajador(trabajador);
-            CorreoElectronico correo = new CorreoElectronico();
             var cuerpoCorreo = "Se ha registrado en el sistema de compensaciones. " +
                     "\nURL DE ACCESO: http://54.87.100.231" +
                     "\n" +
                     "\n\t\tUSUARIO: " + trabajador.getEmail()+ "" +
                     "\n\t\tCONTRASEÑA: " + password;
             try{
+                //mailService.sendAwsSesMail(trabajador.getEmail(),"Cuenta compensaciones SES",cuerpoCorreo);
+                CorreoElectronico.enviarConGMail(trabajador.getEmail(),"Correo compensaciones",cuerpoCorreo);
                 usuarioService.guardaUsuario(usuario);
-                correo.enviarConGMail(trabajador.getEmail(),"Cuenta de compensaciones",cuerpoCorreo);
                 messageOK = "El registro se ha completado exitosamente, revise su correo para obtener usuario y contraseña";
             }catch (Exception e){
                 log.info("Exception: " + e.getMessage());
+                message = "Error al validar el correo proporcionado, " +
+                        "por favor, verifique que esté escrito correctamente" +
+                        " y vuelva a intentar. Si el problema persiste, " +
+                        "utilice otro correo";
             }
         }
         if(!message.equals("")){
@@ -80,6 +99,7 @@ public class ControladorInicio {
         if(!messageOK.equals("")){
             ra.addFlashAttribute("messageOK", messageOK);
         }
+        log.info("Mensage: " + message +" -- "+ messageOK);
         return "redirect:/login";
     }
 

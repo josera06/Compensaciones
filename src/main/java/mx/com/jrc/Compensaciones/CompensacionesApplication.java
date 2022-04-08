@@ -21,7 +21,7 @@ public class CompensacionesApplication {
 	public void init(){
 		// Setting Spring Boot SetTimeZone
 		//TimeZone.setDefault(TimeZone.getTimeZone("CST7CDT"));
-		TimeZone.setDefault(TimeZone.getTimeZone("GMT-06:00"));
+		TimeZone.setDefault(TimeZone.getTimeZone("GMT-05:00"));
 	}
 
 	/**

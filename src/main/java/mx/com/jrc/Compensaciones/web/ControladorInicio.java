@@ -35,8 +35,8 @@ public class ControladorInicio {
     @Autowired
     private UsuarioService usuarioService;
 
-    @Autowired
-    private MailService mailService;
+//    @Autowired
+//    private MailService mailService;
 
     @GetMapping("/CorreoExisteError")
     public String CorreoExisteError(){

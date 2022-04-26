@@ -7,16 +7,16 @@
     <title>Listado de solicitudes</title>
 </head>
 <body>
-<section th:fragment="listadoSolicitudes" id="solicitudes">
+<section th:fragment="listadoInformacion" id="informacion">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>[[#{solicitud.titulo-lista}]]</h4>
+                        <h4>[[#{informacion.titulo-lista}]]</h4>
                     </div>
-                    <div th:if="${solicitudes != null and !solicitudes.empty}">
-                        <table class="table table-stryped" id="lista-solicitudes">
+                    <div th:if="${informacion != null and !informacion.empty}">
+                        <table class="table table-stryped" id="lista-informacion">
                             <thead class="thead-dark">
                             <tr>
                                 <th>Numero de control</th>
@@ -28,24 +28,24 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="solicitud, contador : ${solicitudes}">
-                                <td th:text="${solicitud.idSolicitud}"></td>
-                                <td th:text="${solicitud.fecha}"></td>
-                                <td th:text="${solicitud.observaciones}"></td>
+                            <tr th:each="info, contador : ${informacion}">
+                                <td th:text="${info.idInformacion}"></td>
+                                <td th:text="${info.fecha}"></td>
+                                <td th:text=""></td>
                                 <td>
-                                    <a th:href="@{/reporteSolicitud/} + ${solicitud.idSolicitud}"
+                                    <a th:href="@{/reporteSolicitud/} + ${info.idInformacion}"
                                        class="btn btn-secondary">
                                         <i class="fas fa-download"></i> [[#{accion.descargar}]]
                                     </a>
                                 </td>
                                 <td>
-                                    <a th:href="@{/editarSolicitud/} + ${solicitud.idSolicitud}"
+                                    <a th:href="@{/editarSolicitud/} + ${info.idInformacion}"
                                        class="btn btn-secondary">
                                         <i class="fas fa-angle-double-right"></i> [[#{accion.editar}]]
                                     </a>
                                 </td>
                                 <td>
-                                    <a th:href="@{/eliminarSolicitud/} + ${solicitud.idSolicitud}"
+                                    <a th:href="@{/eliminarSolicitud/} + ${info.idInformacion}"
                                        class="btn btn-dark">
                                         <i class="fas fa-angle-double-right"></i> [[#{accion.eliminar}]]
                                     </a>
@@ -54,8 +54,8 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="text-center p-2" th:if="${solicitudes == null or solicitudes.empty}">
-                        <span th:text="#{solicitud.lista-vacia}">Lista vacía</span>
+                    <div class="text-center p-2" th:if="${informacion == null or informacion.empty}">
+                        <span th:text="#{informacion.lista-vacia}">Lista vacía</span>
                     </div>
                 </div>
             </div>

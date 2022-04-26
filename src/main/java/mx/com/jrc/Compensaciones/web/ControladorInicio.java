@@ -84,7 +84,7 @@ public class ControladorInicio {
                 //mailService.sendAwsSesMail(trabajador.getEmail(),"Cuenta compensaciones SES",cuerpoCorreo);
                 CorreoElectronico.enviarConGMail(trabajador.getEmail(),"Correo compensaciones",cuerpoCorreo);
                 usuarioService.guardaUsuario(usuario);
-                messageOK = "El registro se ha completado exitosamente, revise su correo para obtener usuario y contraseña";
+                messageOK = "El registro se ha completado exitosamente, revise su correo para obtener usuario y contraseña\n ***Si no se visualiza el correo, revise la bandeja del SPAM";
             }catch (Exception e){
                 log.info("Exception: " + e.getMessage());
                 message = "Error al validar el correo proporcionado, " +

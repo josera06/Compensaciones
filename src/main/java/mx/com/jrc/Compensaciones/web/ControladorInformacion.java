@@ -39,7 +39,7 @@ public class ControladorInformacion {
     @GetMapping("/informacion/{idTrabajador}")
     public String mainInformacion(Trabajador trabajador, Model model) {
         trabajador = trabajadorService.encontrar(trabajador);
-        //model.addAttribute("solicitudes",solicitudService.listarSolicitudPorTrabajador(trabajador));
+        model.addAttribute("informacion",informacionService.listarInformacionByUser(trabajador));
         return "informacion";
     }
 
@@ -69,6 +69,7 @@ public class ControladorInformacion {
         }
         log.info("message: --------------------------------" + message);
         ra.addFlashAttribute("message", message);
+        ra.addFlashAttribute("informacion",informacionService.listarInformacionByUser(usuario.getTrabajador()));
         return "redirect:/informacion/"+usuario.getTrabajador().getIdTrabajador();
     }
 }

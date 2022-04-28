@@ -12,4 +12,10 @@ import java.util.List;
 public interface InformacionDAO extends CrudRepository<Informacion,Long> {
     @Query("SELECT i FROM Informacion i WHERE i.trabajador = :#{#trabajador}")
     List<Informacion> getFileNames(@Param("trabajador") Trabajador trabajador);
+
+    public static final String FIND_PROJECTS = "SELECT id_informacion, id_trabajador, fecha, titulo,null as pdf_file,nombre_archivo,content_type,file_size FROM compensaciones.tb_informacion";
+
+    @Query(value = FIND_PROJECTS, nativeQuery = true)
+    List<Informacion> getInformationListWithOutFile();
+
 }

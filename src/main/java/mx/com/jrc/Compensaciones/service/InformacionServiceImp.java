@@ -22,6 +22,12 @@ public class InformacionServiceImp implements InformacionService{
 
     @Override
     @Transactional(readOnly = true)
+    public List<Informacion> listarInformacionSinArchivo() {
+        return (List<Informacion>) informacionDAO.getInformationListWithOutFile();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public List<Informacion> listarInformacionByUser(Trabajador trabajador) {
         return (List<Informacion>) informacionDAO.getFileNames(trabajador);
     }
@@ -47,7 +53,7 @@ public class InformacionServiceImp implements InformacionService{
     @Override
     @Transactional(readOnly = true)
     public boolean existFileName(Trabajador trabajador,String newName){
-        List <Informacion> names = listarInformacionByUser(trabajador);
+        List <Informacion> names = informacionDAO.getInformationListWithOutFile();;
         return names.stream().anyMatch(name -> (name.equals(newName)));
     }
 }

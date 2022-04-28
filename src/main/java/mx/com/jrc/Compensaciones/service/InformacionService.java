@@ -10,6 +10,8 @@ import java.util.List;
 public interface InformacionService {
     public List<Informacion> listarInformacion();
 
+    public List<Informacion> listarInformacionSinArchivo();
+
     public List<Informacion> listarInformacionByUser(Trabajador trabajador);
 
     public void guardar(Informacion informacion);

@@ -15,16 +15,21 @@
                     <div class="card-header">
                         <h4>[[#{informacion.titulo-lista}]]</h4>
                     </div>
+                    <div th:if="${message}" class="alert alert-success">
+                        <span th:text="${message}"></span>
+                    </div>
+                    <div th:if="${messageError}" class="alert alert-danger">
+                        <span th:text="${messageError}"></span>
+                    </div>
                     <div th:if="${informacion != null and !informacion.empty}">
                         <table class="table table-stryped" id="lista-informacion">
                             <thead class="thead-dark">
                             <tr>
                                 <th>Numero de control</th>
-                                <th>Fecha de solicitud</th>
-                                <th>Observaciones</th>
+                                <th>Fecha de publicacion</th>
+                                <th>Titulo</th>
                                 <th>Formato</th>
-                                <th>Editar</th>
-                                <th>Eliminar</th>
+                                <th sec:authorize="hasRole('ROLE_ADMIN')" >Eliminar</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -33,19 +38,13 @@
                                 <td th:text="${info.fecha}"></td>
                                 <td th:text="${info.titulo}"></td>
                                 <td>
-                                    <a th:href="@{/reporteSolicitud/} + ${info.idInformacion}"
+                                    <a th:href="@{/descargaInformacion/} + ${info.idInformacion}"
                                        class="btn btn-secondary">
                                         <i class="fas fa-download"></i> [[#{accion.descargar}]]
                                     </a>
                                 </td>
                                 <td>
-                                    <a th:href="@{/editarSolicitud/} + ${info.idInformacion}"
-                                       class="btn btn-secondary">
-                                        <i class="fas fa-angle-double-right"></i> [[#{accion.editar}]]
-                                    </a>
-                                </td>
-                                <td>
-                                    <a th:href="@{/eliminarSolicitud/} + ${info.idInformacion}"
+                                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/eliminarInformacion/} + ${info.idInformacion}"
                                        class="btn btn-dark">
                                         <i class="fas fa-angle-double-right"></i> [[#{accion.eliminar}]]
                                     </a>

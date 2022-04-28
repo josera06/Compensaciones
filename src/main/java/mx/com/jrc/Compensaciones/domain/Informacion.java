@@ -28,4 +28,31 @@ public class Informacion {
     private String contentType;
     private String fileSize;
 
+    public Informacion(Long idInformacion, Trabajador trabajador, Timestamp fecha, String titulo, String nombreArchivo, String contentType, String fileSize) {
+        this.idInformacion = idInformacion;
+        this.trabajador = trabajador;
+        this.fecha = fecha;
+        this.titulo = titulo;
+        this.nombreArchivo = nombreArchivo;
+        this.contentType = contentType;
+        this.fileSize = fileSize;
+    }
+
+    public Informacion(Long idInformacion) {
+        this.idInformacion = idInformacion;
+    }
+
+    public Informacion() {
+    }
+
+    public Informacion(Long idInformacion, Trabajador trabajador, Timestamp fecha, String titulo, byte[] pdfFile, String nombreArchivo, String contentType, String fileSize) {
+        this.idInformacion = idInformacion;
+        this.trabajador = trabajador;
+        this.fecha = fecha;
+        this.titulo = titulo;
+        this.pdfFile = pdfFile;
+        this.nombreArchivo = nombreArchivo;
+        this.contentType = contentType;
+        this.fileSize = fileSize;
+    }
 }

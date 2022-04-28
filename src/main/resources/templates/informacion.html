@@ -8,7 +8,7 @@
 </head>
 <body>
 <header th:replace="layout/plantilla :: header"></header>
-<section th:replace="layout/botonesAgregar :: agregarInformacion"></section>
+<section sec:authorize="hasRole('ROLE_ADMIN')" th:replace="layout/botonesAgregar :: agregarInformacion"></section>
 <section th:replace="layout/listadoInformacion :: listadoInformacion"></section>
 <section th:replace="layout/agregarInformacion :: agregarInformacion"></section>
 <footer th:replace="layout/plantilla :: footer"></footer>

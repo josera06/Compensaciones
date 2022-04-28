@@ -17,7 +17,7 @@
             <span>&times;</span>
           </button>
         </div>
-        <form  action="#" enctype="multipart/form-data" th:action="@{/guardarInformacion}" th:object="${informacion}"
+        <form action="#" enctype="multipart/form-data" th:action="@{/guardarInformacion}" th:object="${informacion}"
            method="post" class="was-validated">
               <div class="modal-body">
                 <div class="form-group">
@@ -27,18 +27,15 @@
               </div>
               <div class="row" style="margin: 1em;">
                 <div class="col-sm-2">
-                  <label for="fileUpload">Upload a New File:</label>
+                  <label for="fileUpload">Seleccionar archivo: </label>
                 </div>
                 <div class="col-sm-6">
-                  <input type="file" class="form-control-file" id="fileUpload" name="fileUpload">
-                </div>
-                <div class="col-sm-4">
-                  <button type="submit" class="btn btn-dark">Upload</button>
+                  <input type="file" class="form-control-file" id="fileUpload" name="fileUpload" required="true" accept="application/pdf"/>
                 </div>
               </div>
-          <div class="modal-footer">
-            <button class="btn btn-primary" type="submit" th:text="#{accion.guardar}">Guardar</button>
-          </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" type="submit" th:text="#{accion.guardar}">Guardar</button>
+            </div>
         </form>
       </div>
     </div>

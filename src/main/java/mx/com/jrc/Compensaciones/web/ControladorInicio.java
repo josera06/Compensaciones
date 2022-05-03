@@ -82,7 +82,7 @@ public class ControladorInicio {
                     "\n\t\tCONTRASEÑA: " + password;
             try{
                 //mailService.sendAwsSesMail(trabajador.getEmail(),"Cuenta compensaciones SES",cuerpoCorreo);
-                CorreoElectronico.enviarConGMail(trabajador.getEmail(),"Correo compensaciones",cuerpoCorreo);
+                CorreoElectronico.enviarConGMail(trabajador.getEmail(),"SNTSS Sección 37 Trámites y avisos",cuerpoCorreo);
                 usuarioService.guardaUsuario(usuario);
                 messageOK = "El registro se ha completado exitosamente, revise su correo para obtener usuario y contraseña\n ***Si no se visualiza el correo, revise la bandeja del SPAM";
             }catch (Exception e){

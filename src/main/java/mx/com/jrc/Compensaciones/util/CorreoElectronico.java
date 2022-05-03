@@ -3,6 +3,7 @@ package mx.com.jrc.Compensaciones.util;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 public class CorreoElectronico {
@@ -25,7 +26,7 @@ public class CorreoElectronico {
         MimeMessage message = new MimeMessage(session);
 
         try {
-            message.setFrom(new InternetAddress(remitente));
+            message.setFrom(new InternetAddress(remitente,"SNTSS Sección 37 - Trámites y avisos"));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));   //Se podrían añadir varios de la misma manera
             message.setSubject(asunto);
             message.setText(cuerpo);
@@ -36,6 +37,8 @@ public class CorreoElectronico {
         }
         catch (MessagingException me) {
             me.printStackTrace();   //Si se produce un error
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
     }
 }

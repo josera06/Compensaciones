@@ -3,6 +3,7 @@ package mx.com.jrc.Compensaciones.dao;
 import mx.com.jrc.Compensaciones.domain.Informacion;
 import mx.com.jrc.Compensaciones.domain.Solicitud;
 import mx.com.jrc.Compensaciones.domain.Trabajador;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -17,5 +18,9 @@ public interface InformacionDAO extends CrudRepository<Informacion,Long> {
 
     @Query(value = FIND_PROJECTS, nativeQuery = true)
     List<Informacion> getInformationListWithOutFile();
+
+    @Modifying
+    @Query("DELETE FROM Informacion i WHERE i.idInformacion = :id_informacion")
+    void deleteById(@Param("id_informacion") long id_informacion);
 
 }

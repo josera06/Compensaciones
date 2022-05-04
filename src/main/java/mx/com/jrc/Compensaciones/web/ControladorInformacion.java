@@ -19,9 +19,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -59,12 +57,9 @@ public class ControladorInformacion {
     @PostMapping("/guardarInformacion")
     public String addFile(Informacion informacion, @RequestParam("fileUpload") MultipartFile fileUpload, @AuthenticationPrincipal User user, RedirectAttributes ra) throws IOException {
         var usuario = usuarioService.getTrabajadorByUsurario(user.getUsername());
-
         String message = "";
-        log.info("ContentType: " + fileUpload.getContentType());
-        if (fileUpload.getSize() > 1000000) {
-            message = "El archivo es demasiado grande";
-        } else if (informacionService.existFileName(usuario.getTrabajador(),fileUpload.getOriginalFilename())) {
+
+        if (informacionService.existFileName(fileUpload.getOriginalFilename())) {
             message = "Este archivo ya existe";
         } else if (!fileUpload.getContentType().equalsIgnoreCase("application/pdf")){
             message = "Error al guardar: Solo se permiten archivos con formato PDF";
@@ -112,9 +107,12 @@ public class ControladorInformacion {
     }
 
     @GetMapping("/eliminarInformacion/{idInformacion}")
-    public String eliminarSolicitud(Informacion informacion,@AuthenticationPrincipal User user){
+    @ResponseBody
+    public String eliminarSolicitud(@PathVariable("idInformacion") long idInformacion, @AuthenticationPrincipal User user){
         var usuario = usuarioService.getTrabajadorByUsurario(user.getUsername());
-        informacionService.eliminar(informacion);
+        log.info("Usuario: " + usuario);
+        informacionService.eliminar(idInformacion);
         return "redirect:/informacion/"+usuario.getTrabajador().getIdTrabajador();
+        //return "informacion";
     }
 }

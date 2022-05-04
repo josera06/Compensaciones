@@ -45,6 +45,12 @@ public class InformacionServiceImp implements InformacionService{
     }
 
     @Override
+    @Transactional
+    public void eliminar(long idInformacion) {
+        informacionDAO.deleteById(idInformacion);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Informacion encontrar(Informacion informacion) {
         return informacionDAO.findById(informacion.getIdInformacion()).orElse(null);
@@ -52,8 +58,8 @@ public class InformacionServiceImp implements InformacionService{
 
     @Override
     @Transactional(readOnly = true)
-    public boolean existFileName(Trabajador trabajador,String newName){
-        List <Informacion> names = informacionDAO.getInformationListWithOutFile();;
-        return names.stream().anyMatch(name -> (name.equals(newName)));
+    public boolean existFileName(String newName){
+        List <Informacion> names = informacionDAO.getInformationListWithOutFile();
+        return names.stream().anyMatch(nombreArchivo -> (nombreArchivo.equals(newName)));
     }
 }

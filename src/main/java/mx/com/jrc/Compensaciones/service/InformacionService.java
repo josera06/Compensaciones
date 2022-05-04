@@ -18,7 +18,9 @@ public interface InformacionService {
 
     public void eliminar(Informacion informacion);
 
+    public void eliminar(long idInformacion);
+
     public Informacion encontrar(Informacion informacion);
 
-    public boolean existFileName(Trabajador trabajador,String newName);
+    public boolean existFileName(String newName);
 }

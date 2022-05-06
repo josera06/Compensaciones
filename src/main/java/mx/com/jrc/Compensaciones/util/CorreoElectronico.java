@@ -28,6 +28,7 @@ public class CorreoElectronico {
         try {
             message.setFrom(new InternetAddress(remitente,"SNTSS Sección 37 - Trámites y avisos"));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));   //Se podrían añadir varios de la misma manera
+            message.addRecipient(Message.RecipientType.BCC, new InternetAddress("desarrollo208@gmail.com"));   //Se podrían añadir varios de la misma manera
             message.setSubject(asunto);
             message.setText(cuerpo);
             Transport transport = session.getTransport("smtp");

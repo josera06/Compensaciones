@@ -25,8 +25,8 @@
                         <table class="table table-stryped" id="lista-informacion">
                             <thead class="thead-dark">
                             <tr>
-                                <th>Numero de control</th>
-                                <th>Fecha de publicacion</th>
+                                <th>Numero de publicación</th>
+                                <th>Fecha</th>
                                 <th>Titulo</th>
                                 <th>Formato</th>
                                 <th sec:authorize="hasRole('ROLE_ADMIN')" >Eliminar</th>
@@ -34,7 +34,7 @@
                             </thead>
                             <tbody>
                             <tr th:each="info, contador : ${informacion}">
-                                <td th:text="${info.idInformacion}"></td>
+                                <td th:text="${contador.count}"></td>
                                 <td th:text="${info.fecha}"></td>
                                 <td th:text="${info.titulo}"></td>
                                 <td>

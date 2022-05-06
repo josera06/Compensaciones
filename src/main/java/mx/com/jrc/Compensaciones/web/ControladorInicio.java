@@ -75,7 +75,7 @@ public class ControladorInicio {
             usuario.setPassword(EncriptarPassword.encriptarPassword(password));
             usuario.setRoles(roles);
             usuario.setTrabajador(trabajador);
-            var cuerpoCorreo = "Se ha registrado en el sistema de compensaciones. " +
+            var cuerpoCorreo = "Se ha registrado en el sistema de Trámites y Avisos de la sección 37 del SNTSS HGR220 Delegación 25, 26 y 26Bis. " +
                     "\nURL DE ACCESO: http://54.87.100.231" +
                     "\n" +
                     "\n\t\tUSUARIO: " + trabajador.getEmail()+ "" +

@@ -11,7 +11,7 @@ public class CorreoElectronico {
         // Esto es lo que va delante de @gmail.com en tu cuenta de correo. Es el remitente también.
         String remitente = "compensaciones208@gmail.com";  //Para la dirección nomcuenta@gmail.com
 
-        var clave = "z";
+        var clave = "secret";
         var servidorSMTP = "smtp.gmail.com"; //El servidor SMTP de Google//"smtp.mail.yahoo.com"; //
 
         Properties props = System.getProperties();

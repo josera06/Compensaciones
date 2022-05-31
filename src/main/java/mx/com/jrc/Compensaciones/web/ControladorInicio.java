@@ -4,11 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import mx.com.jrc.Compensaciones.domain.Rol;
 import mx.com.jrc.Compensaciones.domain.Trabajador;
 import mx.com.jrc.Compensaciones.domain.Usuario;
-import mx.com.jrc.Compensaciones.service.MailService;
-import mx.com.jrc.Compensaciones.service.RolService;
-import mx.com.jrc.Compensaciones.service.TrabajadorService;
-import mx.com.jrc.Compensaciones.service.UsuarioService;
-import mx.com.jrc.Compensaciones.util.CorreoElectronico;
+import mx.com.jrc.Compensaciones.service.*;
 import mx.com.jrc.Compensaciones.util.EncriptarPassword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -35,8 +31,8 @@ public class ControladorInicio {
     @Autowired
     private UsuarioService usuarioService;
 
-//    @Autowired
-//    private MailService mailService;
+    @Autowired
+    private EmailSenderService emailSenderService;
 
     @GetMapping("/CorreoExisteError")
     public String CorreoExisteError(){
@@ -82,7 +78,8 @@ public class ControladorInicio {
                     "\n\t\tCONTRASEÑA: " + password;
             try{
                 //mailService.sendAwsSesMail(trabajador.getEmail(),"Cuenta compensaciones SES",cuerpoCorreo);
-                CorreoElectronico.enviarConGMail(trabajador.getEmail(),"SNTSS Sección 37 Trámites y avisos",cuerpoCorreo);
+                //CorreoElectronico.enviarConGMail(trabajador.getEmail(),"SNTSS Sección 37 Trámites y avisos",cuerpoCorreo);
+                emailSenderService.sendEmail(trabajador.getEmail(),"SNTSS Sección 37 Trámites y avisos",cuerpoCorreo);
                 usuarioService.guardaUsuario(usuario);
                 messageOK = "El registro se ha completado exitosamente, revise su correo para obtener usuario y contraseña\n ***Si no se visualiza el correo, revise la bandeja del SPAM";
             }catch (Exception e){

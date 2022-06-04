@@ -61,7 +61,7 @@ public class ControladorSolicitud {
         var usuario = usuarioService.getTrabajadorByUsurario(user.getUsername());
         solicitud.setFecha(new java.sql.Timestamp(new Date().getTime()));
         solicitud.setTrabajador(usuario.getTrabajador());
-        ControladorSolicitud.log.info("Solicitud a guardar: " + solicitud);
+        ControladorSolicitud.log.info("Solicitud guardada: " + solicitud);
         solicitudService.guardar(solicitud);
         return "redirect:/solicitud/"+usuario.getTrabajador().getIdTrabajador();
     }

@@ -16,10 +16,168 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" th:src="@{/js/solicitudes.js}"></script>
+    <!--Baner-->
+    <link rel="stylesheet" type="text/css" href="css/layout.css" />
+    <link rel="stylesheet" type="text/css" href="css/style1.css" />
+    <link rel="stylesheet" type="text/css" href="pro_dropdown_3/pro_dropdown_3.css" />
+    <script language="javascript" type="text/javascript" src="js/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="js/jquery.easing.js"></script>
+    <script language="javascript" type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript">
+ $(document).ready( function(){
+		// buttons for next and previous item
+		var buttons = { previous:$('#jslidernews1 .button-previous') ,
+						next:$('#jslidernews1 .button-next') };
+		 $('#jslidernews1').lofJSidernews( { interval : 4000,
+											direction		: 'opacitys',
+											easing			: 'easeInOutExpo',
+											duration		: 1200,
+											auto		 	: true,
+											maxItemDisplay  : 4,
+											navPosition     : 'horizontal', // horizontal
+											navigatorHeight : 32,
+											navigatorWidth  : 80,
+											mainWidth		: 980,
+											buttons			: buttons } );
+	});
+</script>
 </head>
 
 <body>
+    <section th:fragment="sec_login" id="login">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Login</h3>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" th:action="@{/login}">
+                                <div th:if="${messageOK}" class="alert alert-success">
+                                    <span th:text="${messageOK}"></span>
+                                </div>
+                                <div th:if="${message}" class="alert alert-danger">
+                                    <span th:text="${message}"></span>
+                                </div>
+                                <div  id="error-msg" th:if="${param.error}" class="alert alert-danger">
+                                    Nombre de usuario y/o password invalidos
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">Usuario:</label>
+                                    <input type="text" name="username" id="username"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Contraseña:</label>
+                                    <input type="password" name="password" id="password"/>
+                                </div>
+                                <input type="submit" value="Login" class="btn btn-primary btn-block"/>
+                            </form>
+                            <section th:replace="layout/botonesAgregar :: botonesAgregarLogin"></section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section th:fragment="otros-anuncios">
+        <div class="d-flex justify-content-center">
+            <table style="width:50%" border="0">
+                <tr>
+                    <td>
+                        <a href="documentos/prevencion.pdf" download="prevencion">
+                            <img src="img/prevencion.png" alt="prevencion" width="220" height="150">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="documentos/covid.pdf" download="covid">
+                            <img src="img/covid.png" alt="prevencion" width="220" height="150">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="documentos/triptico_4Ts.pdf" download="prevencion">
+                            <img src="img/triptico_4Ts.png" alt="prevencion" width="220" height="150">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <iframe width="220" height="140" src="https://www.youtube.com/embed/vcw60Ix-zsQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                        </iframe>
+                    </td>
+                    <td>
+                        <video width="220" height="150" controls>
+                            <source src="videos/video01_19052022.mp4" type="video/mp4">
+                            Navegador no compatible.
+                        </video>
+                    </td>
+                </tr>
+
+            </table>
+    </section>
+    <section th:fragment="banner_principal">
+        <div class="d-flex justify-content-center">
+            <!------------------------------------- THE CONTENT ------------------------------------------------->
+            <div id="jslidernews1" class="lof-slidecontent" style="width:980px; height:340px;">
+                <div class="preload"><div></div></div>
+                <!-- MAIN CONTENT -->
+                <div class="main-slider-content" style="width:980px; height:340px;">
+                    <ul class="sliders-wrap-inner">
+                        <li>
+                            <a href="documentos/triptico_4Ts.pdf">
+                                <img src="images/thumbl_980x340.jpg" title="Newsflash 1" target="_blank">
+                            </a>
+                            <div class="slider-description">
+                                <div class="slider-meta"><a target="_parent" title="Newsflash 1" th:text="#{baner.titulo.noticia1}" href="#">Titulo noticia 1</a></div>
+                                <h4 th:text="#{baner.subtitulo.noticia1}"></h4>
+                                <p th:text="#{baner.descripcion.noticia1}"></p>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="documentos/prevencion.pdf">
+                                <img src="images/thumbl_980x340_002.jpg" title="Newsflash 2">
+                            </a>
+                            <div class="slider-description">
+                                <div class="slider-meta"><a target="_parent" title="Newsflash 2" th:text="#{baner.titulo.noticia2}" href="#">Titulo noticia 2</a><!--<i> — Monday, February 15, 2010 12:42</i>--></div>
+                                <h4 th:text="#{baner.subtitulo.noticia2}"></h4>
+                                <p th:text="#{baner.descripcion.noticia2}"></p>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="documentos/COVID.pdf">
+                                <img src="images/thumbl_980x340_003.jpg" title="Newsflash 3" >
+                            </a>
+
+                            <div class="slider-description">
+                                <div class="slider-meta"><a target="_parent" title="Newsflash 3" th:text="#{baner.titulo.noticia3}" href="#">DAHIPRO Y SU MASCOTA</a><!--<i> — Monday, February 15, 2010 12:42</i>--></div>
+                                <h4 th:text="#{baner.subtitulo.noticia3}"></h4>
+                                <p th:text="#{baner.descripcion.noticia3}"></p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END MAIN CONTENT -->
+                <!-- NAVIGATOR -->
+                <div class="navigator-content">
+                    <div class="button-next">Next</div>
+                    <div class="navigator-wrapper">
+                        <ul class="navigator-wrap-inner">
+                            <li><img src="images/thumbs/thumbl_980x340.jpg" /></li>
+                            <li><img src="images/thumbs/thumbl_980x340_002.jpg" /></li>
+                            <li><img src="images/thumbs/thumbl_980x340_003.jpg" /></li>
+                        </ul>
+                    </div>
+                    <div  class="button-previous">Previous</div>
+                </div>
+                <!----------------- END OF NAVIGATOR --------------------->
+                <!-- BUTTON PLAY-STOP -->
+                <div class="button-control"><span></span></div>
+                <!-- END OF BUTTON PLAY-STOP -->
+            </div>
+            <br/>
+            <!--------------------------- END OF THE CONTENT --------------------------------------->
+        </div>
+    </section>
     <header th:fragment="header">
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
             <div class="container">

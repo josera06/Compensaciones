@@ -1,4 +1,4 @@
--<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
@@ -112,8 +112,8 @@
                         </video>
                     </td>
                 </tr>
-
             </table>
+        </div>
     </section>
     <section th:fragment="banner_principal">
         <div class="d-flex justify-content-center">
@@ -124,8 +124,8 @@
                 <div class="main-slider-content" style="width:980px; height:340px;">
                     <ul class="sliders-wrap-inner">
                         <li>
-                            <a href="documentos/triptico_4Ts.pdf">
-                                <img src="images/thumbl_980x340.jpg" title="Newsflash 1" target="_blank">
+                            <a href="#" data-toggle="modal" data-target="#noticia1">
+                                <img src="images/thumbl_980x340.jpg" title="Newsflash 1">
                             </a>
                             <div class="slider-description">
                                 <div class="slider-meta"><a target="_parent" title="Newsflash 1" th:text="#{baner.titulo.noticia1}" href="#">Titulo noticia 1</a></div>
@@ -134,7 +134,7 @@
                             </div>
                         </li>
                         <li>
-                            <a href="documentos/prevencion.pdf">
+                            <a href="#" data-toggle="modal" data-target="#noticia2">
                                 <img src="images/thumbl_980x340_002.jpg" title="Newsflash 2">
                             </a>
                             <div class="slider-description">
@@ -144,12 +144,11 @@
                             </div>
                         </li>
                         <li>
-                            <a href="documentos/COVID.pdf">
-                                <img src="images/thumbl_980x340_003.jpg" title="Newsflash 3" >
+                            <a href="#" data-toggle="modal" data-target="#noticia3">
+                                <img src="images/thumbl_980x340_003.jpg" title="Newsflash 3">
                             </a>
-
                             <div class="slider-description">
-                                <div class="slider-meta"><a target="_parent" title="Newsflash 3" th:text="#{baner.titulo.noticia3}" href="#">DAHIPRO Y SU MASCOTA</a><!--<i> — Monday, February 15, 2010 12:42</i>--></div>
+                                <div class="slider-meta"><a target="_parent" title="Newsflash 3" th:text="#{baner.titulo.noticia3}" href="#"></a><!--<i> — Monday, February 15, 2010 12:42</i>--></div>
                                 <h4 th:text="#{baner.subtitulo.noticia3}"></h4>
                                 <p th:text="#{baner.descripcion.noticia3}"></p>
                             </div>

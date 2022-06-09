@@ -107,12 +107,10 @@ public class ControladorInformacion {
     }
 
     @GetMapping("/eliminarInformacion/{idInformacion}")
-    @ResponseBody
-    public String eliminarSolicitud(@PathVariable("idInformacion") long idInformacion, @AuthenticationPrincipal User user){
+    public String eliminarSolicitud(@PathVariable("idInformacion") long idInformacion, @AuthenticationPrincipal User user, RedirectAttributes ra){
         var usuario = usuarioService.getTrabajadorByUsurario(user.getUsername());
-        log.info("Usuario: " + usuario);
         informacionService.eliminar(idInformacion);
+        ra.addFlashAttribute("informacion",informacionService.listarInformacionSinArchivo());
         return "redirect:/informacion/"+usuario.getTrabajador().getIdTrabajador();
-        //return "informacion";
     }
 }

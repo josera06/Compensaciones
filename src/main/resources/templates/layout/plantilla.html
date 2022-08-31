@@ -28,12 +28,12 @@
 		// buttons for next and previous item
 		var buttons = { previous:$('#jslidernews1 .button-previous') ,
 						next:$('#jslidernews1 .button-next') };
-		 $('#jslidernews1').lofJSidernews( { interval : 4000,
+		 $('#jslidernews1').lofJSidernews( { interval : 7000,
 											direction		: 'opacitys',
 											easing			: 'easeInOutExpo',
 											duration		: 1200,
 											auto		 	: true,
-											maxItemDisplay  : 4,
+											maxItemDisplay  : 5,
 											navPosition     : 'horizontal', // horizontal
 											navigatorHeight : 32,
 											navigatorWidth  : 80,
@@ -153,6 +153,26 @@
                                 <p th:text="#{baner.descripcion.noticia3}"></p>
                             </div>
                         </li>
+                        <li>
+                            <a href="https://climss.imss.gob.mx/" target="_blank">
+                                <img src="images/thumbl_980x340_004.jpg" title="Newsflash 4">
+                            </a>
+                            <div class="slider-description">
+                                <div class="slider-meta"><a target="_parent" title="Newsflash 4" th:text="#{baner.titulo.noticia4}" href="#">Titulo noticia 1</a></div>
+                                <h4 th:text="#{baner.subtitulo.noticia4}"></h4>
+                                <p th:text="#{baner.descripcion.noticia4}"></p>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#noticia5">
+                                <img src="images/thumbl_980x340_005.png" title="Newsflash 5">
+                            </a>
+                            <div class="slider-description">
+                                <div class="slider-meta"><a target="_parent" title="Newsflash 5" th:text="#{baner.titulo.noticia5}" href="#"></a><!--<i> — Monday, February 15, 2010 12:42</i>--></div>
+                                <h4 th:text="#{baner.subtitulo.noticia5}"></h4>
+                                <p th:text="#{baner.descripcion.noticia5}"></p>
+                            </div>
+                        </li>
                     </ul>
                 </div>
                 <!-- END MAIN CONTENT -->
@@ -164,6 +184,8 @@
                             <li><img src="images/thumbs/thumbl_980x340.jpg" /></li>
                             <li><img src="images/thumbs/thumbl_980x340_002.jpg" /></li>
                             <li><img src="images/thumbs/thumbl_980x340_003.jpg" /></li>
+                            <li><img src="images/thumbs/thumbl_980x340_004.jpg" /></li>
+                            <li><img src="images/thumbs/thumbl_70x25_005.png" /></li>
                         </ul>
                     </div>
                     <div  class="button-previous"></div>

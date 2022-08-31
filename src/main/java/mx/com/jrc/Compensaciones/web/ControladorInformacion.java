@@ -73,7 +73,7 @@ public class ControladorInformacion {
             informacion.setContentType(fileUpload.getContentType());
             informacion.setTrabajador(usuario.getTrabajador());
 
-            log.info("Información que será guardada: " + informacion);
+            log.info("Información a guardada: " + informacion);
             informacionService.guardar(informacion);
             message = "El archivo se ha guardado correctamente.";
         }
